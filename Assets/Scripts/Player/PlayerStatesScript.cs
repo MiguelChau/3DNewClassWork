@@ -22,23 +22,23 @@ public class IdleState : StateBase
     }
 }
 
-public class WalkingState : StateBase
+public class RunningState : StateBase
 {
     public override void OnStateEnter(object o = null)
     {
-        Debug.Log("Entering Walking State");
+        Debug.Log("Entering Running State");
 
     }
 
     public override void OnStateStay()
     {
-        Debug.Log("Walking State");
+        Debug.Log("Running  State");
 
     }
 
     public override void OnStateExit()
     {
-        Debug.Log("Exiting Walking State");
+        Debug.Log("Exiting Running  State");
 
     }
 }
