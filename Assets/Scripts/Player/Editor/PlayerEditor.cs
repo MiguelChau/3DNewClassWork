@@ -1,7 +1,7 @@
 using System.Linq;
 using UnityEditor;
 
-[CustomEditor(typeof(PlayerController))]
+[CustomEditor(typeof(PlayerStateMachine))]
 public class PlayerEditor : Editor
 {
     private bool showFoldOut;
@@ -10,7 +10,7 @@ public class PlayerEditor : Editor
     {
         base.OnInspectorGUI();
 
-        PlayerController playerController = (PlayerController)target;
+        PlayerStateMachine playerController = (PlayerStateMachine)target;
 
         EditorGUILayout.Space(30);
         EditorGUILayout.LabelField("State Machine");
