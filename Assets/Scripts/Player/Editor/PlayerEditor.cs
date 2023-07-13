@@ -1,4 +1,4 @@
-using System.Linq;
+/*using System.Linq;
 using UnityEditor;
 
 [CustomEditor(typeof(PlayerStateMachine))]
@@ -38,3 +38,4 @@ public class PlayerEditor : Editor
         }
     }
 }
+*/
