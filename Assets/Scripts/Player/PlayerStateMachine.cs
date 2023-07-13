@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
+
 using UnityEngine;
 using Chau.StateMachine;
 
@@ -10,6 +12,7 @@ public enum PlayerStates
     JUMPING
 }
 
+[Serializable]
 public class PlayerStateMachine : StateMachine<PlayerStates>
 {
 

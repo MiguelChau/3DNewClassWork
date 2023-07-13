@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using NaughtyAttributes; 
+using NaughtyAttributes;
+using System;
 
 
 namespace Chau.StateMachine
 {
+    [Serializable]
     public class StateMachine<T> where T : System.Enum 
     {
 

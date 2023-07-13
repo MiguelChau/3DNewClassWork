@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     
 
     private float vSpeed = 0f;
-    private PlayerStateMachine _playerStateMachine;
+    public PlayerStateMachine _playerStateMachine;
 
     private void Start()
     {
@@ -73,6 +73,7 @@ public class PlayerController : MonoBehaviour
 
             
             speedVector = (transform.forward * inputAxisVertical + transform.right * inputAxisHorizontal) * speed * diagonalFactor;
+
             if (Input.GetKey(keyRun))
             {
                 speedVector *= speedRun;

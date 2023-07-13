@@ -1,8 +1,8 @@
-/*using System.Linq;
+using System.Linq;
 using UnityEditor;
 
 [CustomEditor(typeof(PlayerStateMachine))]
-public class PlayerEditor : Editor
+public class PlayerStateMachineEditor : Editor
 {
     private bool showFoldOut;
 
@@ -38,4 +38,4 @@ public class PlayerEditor : Editor
         }
     }
 }
-*/
+
