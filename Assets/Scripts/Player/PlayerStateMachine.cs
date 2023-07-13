@@ -10,43 +10,33 @@ public enum PlayerStates
     JUMPING
 }
 
-public class PlayerStateMachine : MonoBehaviour
+public class PlayerStateMachine : StateMachine<PlayerStates>
 {
-    
-    public StateMachine<PlayerStates> stateMachine;
 
-    private void Awake()
-    {       
-        stateMachine = new StateMachine<PlayerStates>();
-    }
-
-    private void Start()
+    public override void Init()
     {
-        stateMachine.Init();
-        stateMachine.RegisterStates(PlayerStates.IDLE, new IdleState());
-        stateMachine.RegisterStates(PlayerStates.RUN, new RunningState());
-        stateMachine.RegisterStates(PlayerStates.JUMPING, new JumpingState());
+        base.Init();
+        RegisterStates(PlayerStates.IDLE, new IdleState());
+        RegisterStates(PlayerStates.RUN, new RunningState());
+        RegisterStates(PlayerStates.JUMPING, new JumpingState());
 
-        stateMachine.SwitchState(PlayerStates.IDLE);
-    }
+        SwitchState(PlayerStates.IDLE);
+    }    
+        
 
-    private void Update()
-    {
-        stateMachine.Update();
-    }
+     public void MoveForward()
+     {
+        SwitchState(PlayerStates.RUN);
+     }
 
-    public void MoveForward()
-    {
-        stateMachine.SwitchState(PlayerStates.RUN);
-    }
+     public void Stop()
+     {
+        SwitchState(PlayerStates.IDLE);
+     }
 
-    public void Stop()
-    {
-        stateMachine.SwitchState(PlayerStates.IDLE);
-    }
-
-    public void Jump()
-    {
-        stateMachine.SwitchState(PlayerStates.JUMPING);
-    }
+     public void Jump()
+     {
+        SwitchState(PlayerStates.JUMPING);
+     }
 }
+

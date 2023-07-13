@@ -9,7 +9,7 @@ namespace Chau.StateMachine
     public class StateMachine<T> where T : System.Enum 
     {
 
-    //chave
+    
     public Dictionary<T, StateBase> dictionaryState; 
 
     private StateBase _currentState;
@@ -20,7 +20,7 @@ namespace Chau.StateMachine
         get { return _currentState; }
     }
 
-    public void Init()
+    public virtual void Init()
     {
        dictionaryState = new Dictionary<T, StateBase>();
     }

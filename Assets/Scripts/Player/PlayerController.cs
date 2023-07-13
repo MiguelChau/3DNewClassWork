@@ -21,9 +21,19 @@ public class PlayerController : MonoBehaviour
     
 
     private float vSpeed = 0f;
+    private PlayerStateMachine _playerStateMachine;
+
+    private void Start()
+    {
+        _playerStateMachine = new PlayerStateMachine();
+        _playerStateMachine.Init();
+    }
 
     private void Update()
     {
+        _playerStateMachine.Update();
+
+
         transform.Rotate(0, Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime, 0); 
 
         var inputAxisVertical = Input.GetAxis("Vertical");
@@ -37,6 +47,7 @@ public class PlayerController : MonoBehaviour
             {
                 vSpeed = jumpSpeed;
                 _isJumping = true;
+                _playerStateMachine.Jump();
                 
             }
             else
@@ -46,7 +57,16 @@ public class PlayerController : MonoBehaviour
             
         }
         var isWalking = inputAxisVertical != 0 || inputAxisHorizontal != 0;
-        if (isWalking && (Mathf.Abs(inputAxisVertical) > 0 && Mathf.Abs(inputAxisHorizontal) > 0))
+        if(isWalking)
+        {
+            _playerStateMachine.MoveForward();
+        }
+        else
+        {
+            _playerStateMachine.Stop();
+        }
+
+        if (isWalking && (Mathf.Abs(inputAxisVertical) > 0 || Mathf.Abs(inputAxisHorizontal) > 0))
         {
             
             float diagonalFactor = Mathf.Sqrt(0.5f);
