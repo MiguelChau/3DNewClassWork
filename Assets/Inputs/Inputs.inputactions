@@ -1,0 +1,54 @@
+{
+    "name": "Inputs",
+    "maps": [
+        {
+            "name": "GamePlay",
+            "id": "2bec2e8c-93f4-42cd-b79c-30ee370b6dde",
+            "actions": [
+                {
+                    "name": "Cast",
+                    "type": "Button",
+                    "id": "acfbdf58-a9ae-4900-a23a-ceafe10dd508",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Cast2",
+                    "type": "Button",
+                    "id": "6a8cde14-9e11-4dfe-b9f0-61d29a3cf0b7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "e706495a-df17-41c6-a3fd-02ddcac02df1",
+                    "path": "<Keyboard>/1",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cast",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "de9f6858-7ca5-4887-8e66-dd61b6d04be4",
+                    "path": "<Keyboard>/2",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cast2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
