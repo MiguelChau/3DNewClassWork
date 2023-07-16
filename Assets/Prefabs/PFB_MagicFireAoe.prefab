@@ -135,5 +135,5 @@ MonoBehaviour:
   uIGunUpdaters: []
   maxCast: 4
   timeToRecharge: 1
-  amountPerCast: 6
-  angle: 5
+  amountPerCast: 4
+  angle: 10
