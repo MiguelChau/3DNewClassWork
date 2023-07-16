@@ -130,8 +130,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabSpelltile: {fileID: 2453895476040628167, guid: 9e1040293e196854d85ec37ed2da4334, type: 3}
   positionToCast: {fileID: 2276641910748055308}
-  timeBetweenCast: 0.1
-  speed: 50
+  timeBetweenCast: 0.3
+  speed: 40
   uIGunUpdaters: []
   maxCast: 10
   timeToRecharge: 1

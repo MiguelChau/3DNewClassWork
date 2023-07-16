@@ -15,6 +15,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Cast1",
+                    "type": "Button",
+                    "id": "ef85a88e-e7c4-4662-babe-3dcd07d7875a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Cast2",
                     "type": "Button",
                     "id": "6a8cde14-9e11-4dfe-b9f0-61d29a3cf0b7",
@@ -28,11 +37,22 @@
                 {
                     "name": "",
                     "id": "e706495a-df17-41c6-a3fd-02ddcac02df1",
-                    "path": "<Keyboard>/1",
+                    "path": "<Keyboard>/x",
                     "interactions": "Press",
                     "processors": "",
                     "groups": "",
                     "action": "Cast",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6780ab82-8733-41e9-9b44-b0f85a8e72a0",
+                    "path": "<Keyboard>/1",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cast1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

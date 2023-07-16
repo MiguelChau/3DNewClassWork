@@ -37,6 +37,15 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Cast1"",
+                    ""type"": ""Button"",
+                    ""id"": ""ef85a88e-e7c4-4662-babe-3dcd07d7875a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Cast2"",
                     ""type"": ""Button"",
                     ""id"": ""6a8cde14-9e11-4dfe-b9f0-61d29a3cf0b7"",
@@ -50,11 +59,22 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""e706495a-df17-41c6-a3fd-02ddcac02df1"",
-                    ""path"": ""<Keyboard>/1"",
+                    ""path"": ""<Keyboard>/x"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Cast"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6780ab82-8733-41e9-9b44-b0f85a8e72a0"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cast1"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -77,6 +97,7 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
         // GamePlay
         m_GamePlay = asset.FindActionMap("GamePlay", throwIfNotFound: true);
         m_GamePlay_Cast = m_GamePlay.FindAction("Cast", throwIfNotFound: true);
+        m_GamePlay_Cast1 = m_GamePlay.FindAction("Cast1", throwIfNotFound: true);
         m_GamePlay_Cast2 = m_GamePlay.FindAction("Cast2", throwIfNotFound: true);
     }
 
@@ -138,12 +159,14 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_GamePlay;
     private IGamePlayActions m_GamePlayActionsCallbackInterface;
     private readonly InputAction m_GamePlay_Cast;
+    private readonly InputAction m_GamePlay_Cast1;
     private readonly InputAction m_GamePlay_Cast2;
     public struct GamePlayActions
     {
         private @Inputs m_Wrapper;
         public GamePlayActions(@Inputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @Cast => m_Wrapper.m_GamePlay_Cast;
+        public InputAction @Cast1 => m_Wrapper.m_GamePlay_Cast1;
         public InputAction @Cast2 => m_Wrapper.m_GamePlay_Cast2;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
@@ -157,6 +180,9 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                 @Cast.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnCast;
                 @Cast.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnCast;
                 @Cast.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnCast;
+                @Cast1.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnCast1;
+                @Cast1.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnCast1;
+                @Cast1.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnCast1;
                 @Cast2.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnCast2;
                 @Cast2.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnCast2;
                 @Cast2.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnCast2;
@@ -167,6 +193,9 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                 @Cast.started += instance.OnCast;
                 @Cast.performed += instance.OnCast;
                 @Cast.canceled += instance.OnCast;
+                @Cast1.started += instance.OnCast1;
+                @Cast1.performed += instance.OnCast1;
+                @Cast1.canceled += instance.OnCast1;
                 @Cast2.started += instance.OnCast2;
                 @Cast2.performed += instance.OnCast2;
                 @Cast2.canceled += instance.OnCast2;
@@ -177,6 +206,7 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
     public interface IGamePlayActions
     {
         void OnCast(InputAction.CallbackContext context);
+        void OnCast1(InputAction.CallbackContext context);
         void OnCast2(InputAction.CallbackContext context);
     }
 }

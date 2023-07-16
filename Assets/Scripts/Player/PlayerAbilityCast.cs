@@ -11,6 +11,9 @@ public class PlayerAbilityCast : PlayerAbilityBase
 
     private MagicBase _currentMagic;
     private int currentMagicIndex;
+
+    private MagicBase[] _magicInstances;
+
     protected override void Init()
     {
         base.Init();
@@ -19,16 +22,23 @@ public class PlayerAbilityCast : PlayerAbilityBase
 
         inputs.GamePlay.Cast.performed += ctx => StartCast();
         inputs.GamePlay.Cast.canceled += ctx => StopCast();
-        inputs.GamePlay.Cast.performed += ctx => SwitchSpell(0);
+        inputs.GamePlay.Cast1.performed += ctx => SwitchSpell(0);
         inputs.GamePlay.Cast2.performed += ctx => SwitchSpell(1);
     }
 
     private void CreateMagic()
     {
-        currentMagicIndex = 0;
-        _currentMagic = Instantiate(magicBase[currentMagicIndex], castPosition);
+        _magicInstances = new MagicBase[magicBase.Length];
 
-       _currentMagic.transform.localPosition = _currentMagic.transform.localEulerAngles = Vector3.zero;
+        for(int i = 0; i < _magicInstances.Length; ++i)
+        {
+            _magicInstances[i] = Instantiate(magicBase[i], castPosition);
+            _magicInstances[i].gameObject.SetActive(false);
+            _magicInstances[i].transform.localPosition = _magicInstances[i].transform.localEulerAngles = Vector3.zero;
+        }
+        _currentMagic = _magicInstances[0];
+        _currentMagic.gameObject.SetActive(true);
+        currentMagicIndex = 0;
     }
 
     private void StartCast()
@@ -50,10 +60,10 @@ public class PlayerAbilityCast : PlayerAbilityBase
 
         if (currentMagicIndex != newIndex)
         {
-            Destroy(_currentMagic.gameObject);
             currentMagicIndex = newIndex;
-            _currentMagic = Instantiate(magicBase[currentMagicIndex], castPosition);
-            _currentMagic.transform.localPosition = _currentMagic.transform.localEulerAngles = Vector3.zero;
+            _currentMagic.gameObject.SetActive(false);
+            _currentMagic = _magicInstances[currentMagicIndex];
+            _currentMagic.gameObject.SetActive(true);
         }
     }
 }
