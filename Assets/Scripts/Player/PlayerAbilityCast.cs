@@ -20,10 +20,21 @@ public class PlayerAbilityCast : PlayerAbilityBase
 
         CreateMagic();
 
-        inputs.GamePlay.Cast.performed += ctx => StartCast();
-        inputs.GamePlay.Cast.canceled += ctx => StopCast();
-        inputs.GamePlay.Cast1.performed += ctx => SwitchSpell(0);
-        inputs.GamePlay.Cast2.performed += ctx => SwitchSpell(1);
+        //inputs.GamePlay.Cast.performed += ctx => StartCast();
+        //inputs.GamePlay.Cast.canceled += ctx => StopCast();
+        inputs.GamePlay.Cast1.performed += ctx =>
+        {
+            SwitchSpell(0);
+            StartCast();
+        };
+        inputs.GamePlay.Cast1.canceled += ctx => StopCast();
+
+        inputs.GamePlay.Cast2.performed += ctx =>
+        {
+            SwitchSpell(1);
+            StartCast();
+        };
+        inputs.GamePlay.Cast2.canceled += ctx => StopCast();
     }
 
     private void CreateMagic()

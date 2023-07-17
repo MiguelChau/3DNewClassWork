@@ -21,6 +21,12 @@ public class SpelltileBase : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("Hit");
 
+        var damageable = collision.transform.GetComponent<IDamageable>();
+
+        if (damageable != null) damageable.Damage(damageAmount);
+
+        Destroy(gameObject);
     }
 }
