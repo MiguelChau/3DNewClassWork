@@ -108,6 +108,7 @@ GameObject:
   - component: {fileID: 8304345193531322149}
   - component: {fileID: 2453895476040628167}
   - component: {fileID: -176145620731517345}
+  - component: {fileID: 2140191386609368725}
   m_Layer: 3
   m_Name: PFB_Spelltile
   m_TagString: Untagged
@@ -163,6 +164,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!135 &2140191386609368725
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3775104534137901994}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.293876
+  m_Center: {x: 0, y: 0.008320212, z: -0.02405709}
 --- !u!1001 &8364137487821779618
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -226,7 +240,18 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 11450262, guid: 8f18e1d8c46c51f429429815455062fc, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11462752, guid: 8f18e1d8c46c51f429429815455062fc, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 13546184, guid: 8f18e1d8c46c51f429429815455062fc, type: 3}
+    - {fileID: 5453920, guid: 8f18e1d8c46c51f429429815455062fc, type: 3}
+    - {fileID: 11437010, guid: 8f18e1d8c46c51f429429815455062fc, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8f18e1d8c46c51f429429815455062fc, type: 3}
 --- !u!4 &8364137487821591610 stripped
 Transform:

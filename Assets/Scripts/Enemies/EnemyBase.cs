@@ -9,7 +9,6 @@ namespace Enemy
     public class EnemyBase : MonoBehaviour, IDamageable
     {
         public Collider enemyCollider;
-        public FlashColor flashColor;
         public ParticleSystem enemyParticleSystem;
         public float startLife = 10f;
 
@@ -61,8 +60,7 @@ namespace Enemy
 
         public void OnDamage(float f)
         {
-            if (flashColor != null) flashColor.Flash();
-            if (enemyParticleSystem != null) enemyParticleSystem.Emit(15);
+            if (enemyParticleSystem != null) enemyParticleSystem.Play();
             _currentLife -= f;
 
             if (_currentLife <= 0)
@@ -85,16 +83,7 @@ namespace Enemy
             _animationBase.PlayAnimationByTrigger(animationType);
         }
         #endregion
-        //debug
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.T))
-            {
-                OnDamage(5f);
-            }
-        }
-
+        
         public void Damage(float damage)
         {
             Debug.Log("Damage");
