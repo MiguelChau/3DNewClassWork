@@ -10,6 +10,7 @@ namespace Enemy
     {
         public Collider enemyCollider;
         public ParticleSystem enemyParticleSystem;
+        public ParticleSystem enemyDeathParticleSystem;
         public float startLife = 10f;
 
         [SerializeField] private float _currentLife;
@@ -45,7 +46,7 @@ namespace Enemy
 
         protected virtual void Kill()
         {
-
+            if (enemyDeathParticleSystem != null) enemyDeathParticleSystem.Play();
             OnKill();
         }
 
