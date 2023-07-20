@@ -9,6 +9,8 @@ public class SpelltileBase : MonoBehaviour
     public int damageAmount = 1;
     public float speed = 50f;
 
+    public List<string> tagsToHit;
+
 
     private void Awake()
     {
@@ -21,12 +23,19 @@ public class SpelltileBase : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Hit");
+        foreach (var t in tagsToHit)
+        {
+            if (collision.transform.tag == t)
+            {
+                var damageable = collision.transform.GetComponent<IDamageable>();
 
-        var damageable = collision.transform.GetComponent<IDamageable>();
+                if (damageable != null) damageable.Damage(damageAmount);
+            }
 
-        if (damageable != null) damageable.Damage(damageAmount);
-
+            break;
+        }
         Destroy(gameObject);
+
+
     }
 }

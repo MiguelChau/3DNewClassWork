@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamageable
 {
     public Animator myAnimator;
     public CharacterController characterController;
@@ -28,6 +28,12 @@ public class PlayerController : MonoBehaviour
         _playerStateMachine = new PlayerStateMachine();
         _playerStateMachine.Init();
     }
+
+    public void Damage(float damage)
+    {
+        Damage(damage);
+    }
+
 
     private void Update()
     {

@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 7213264043854572764}
   - component: {fileID: 7213264043854572767}
   - component: {fileID: 7213264043854572766}
+  - component: {fileID: 2552550460968550243}
   m_Layer: 0
   m_Name: Enemy_01
   m_TagString: Untagged
@@ -125,6 +126,25 @@ MonoBehaviour:
     trigger: Attack_01
   - animationType: 4
     trigger: Death
+--- !u!114 &2552550460968550243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7213264043854572753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fcbe3510b2e7044e8d2896c5e84ab7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wayPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  minDistance: 1
+  speed: 3
 --- !u!1001 &2444409299947925273
 PrefabInstance:
   m_ObjectHideFlags: 0

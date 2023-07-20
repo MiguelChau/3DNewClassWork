@@ -12,6 +12,7 @@ namespace Enemy
         public ParticleSystem enemyParticleSystem;
         public ParticleSystem enemyDeathParticleSystem;
         public float startLife = 10f;
+        public bool lookAtPlayer = false;
 
         [SerializeField] private float _currentLife;
 
@@ -23,12 +24,16 @@ namespace Enemy
         public Ease startAnimationEase = Ease.OutBack;
         public bool startWithBornAnimation = true;
 
+        private PlayerController _player;
 
         private void Awake()
         {
             Init();
         }
-
+        private void Start()
+        {
+            _player = GameObject.FindObjectOfType<PlayerController>();
+        }
         protected void ResetLife()
         {
             _currentLife = startLife;
@@ -89,6 +94,24 @@ namespace Enemy
         {
             Debug.Log("Damage");
             OnDamage(damage);
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            PlayerController p = collision.transform.GetComponent<PlayerController>();
+
+            if (p != null)
+            {
+                p.Damage(1);
+            }
+        }
+
+        public virtual void Update()  
+        {
+            if (lookAtPlayer)
+            {
+                transform.LookAt(_player.transform.position);
+            }
         }
     }
 
