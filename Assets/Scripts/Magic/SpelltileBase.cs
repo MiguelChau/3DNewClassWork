@@ -29,10 +29,16 @@ public class SpelltileBase : MonoBehaviour
             {
                 var damageable = collision.transform.GetComponent<IDamageable>();
 
-                if (damageable != null) damageable.Damage(damageAmount);
+                if (damageable != null)
+                {
+
+                    damageable.Damage(damageAmount);
+
+                }
+
+                break;
             }
 
-            break;
         }
         Destroy(gameObject);
 

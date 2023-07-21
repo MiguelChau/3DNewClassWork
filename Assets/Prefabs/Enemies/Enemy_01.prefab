@@ -43,10 +43,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7213264043854572765}
-  - component: {fileID: 7213264043854572764}
   - component: {fileID: 7213264043854572767}
   - component: {fileID: 7213264043854572766}
-  - component: {fileID: 2552550460968550243}
+  - component: {fileID: 1430806760947683850}
+  - component: {fileID: 7281535443827388132}
   m_Layer: 0
   m_Name: Enemy_01
   m_TagString: Untagged
@@ -70,27 +70,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &7213264043854572764
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7213264043854572753}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7f718be34dcb7f4dbaf5fd22f76df39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyCollider: {fileID: 7213264043854572767}
-  enemyParticleSystem: {fileID: 3712739892349098953}
-  enemyDeathParticleSystem: {fileID: 2444409299932328157}
-  startLife: 20
-  _currentLife: 0
-  _animationBase: {fileID: 7213264043854572766}
-  startAnimationDuration: 1
-  startAnimationEase: 32
-  startWithBornAnimation: 1
 --- !u!65 &7213264043854572767
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -126,7 +105,7 @@ MonoBehaviour:
     trigger: Attack_01
   - animationType: 4
     trigger: Death
---- !u!114 &2552550460968550243
+--- !u!114 &1430806760947683850
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -135,16 +114,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 7213264043854572753}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fcbe3510b2e7044e8d2896c5e84ab7b, type: 3}
+  m_Script: {fileID: 11500000, guid: f87c1295f9fae8041a48ac93494b97d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wayPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  minDistance: 1
-  speed: 3
+  enemyCollider: {fileID: 7213264043854572767}
+  lookAtPlayer: 0
+  startAnimationDuration: 0.5
+  startAnimationEase: 27
+  startWithBornAnimation: 1
+  attackAmount: 5
+  timeBetweenAttacks: 0.5
+  speed: 5
+  waypoints: []
+  healthBase: {fileID: 7281535443827388132}
+--- !u!114 &7281535443827388132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7213264043854572753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c5744e2c44bbe04d914462d7e66122d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startLife: 10
+  destroyOnKill: 0
+  _currentLife: 0
 --- !u!1001 &2444409299947925273
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -254,11 +251,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7867af58a6ec48846ae807eb4022fbaa, type: 3}
---- !u!198 &2444409299932328157 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 19800004, guid: 7867af58a6ec48846ae807eb4022fbaa, type: 3}
-  m_PrefabInstance: {fileID: 2444409299947925273}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2444409299947533725 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400004, guid: 7867af58a6ec48846ae807eb4022fbaa, type: 3}
@@ -271,6 +263,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3284606320600798134}
     m_Modifications:
+    - target: {fileID: 7390798795186792040, guid: 08a8ba91d259570469ae16b436162ba8, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7390798795192275854, guid: 08a8ba91d259570469ae16b436162ba8, type: 3}
       propertyPath: m_Name
       value: PFB_Hit_VFX
@@ -321,11 +317,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08a8ba91d259570469ae16b436162ba8, type: 3}
---- !u!198 &3712739892349098953 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 7390798795178347246, guid: 08a8ba91d259570469ae16b436162ba8, type: 3}
-  m_PrefabInstance: {fileID: 6131414610443391271}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3712739892364304009 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7390798795192504238, guid: 08a8ba91d259570469ae16b436162ba8, type: 3}
@@ -440,21 +431,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7213264043989229907
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7213691735831480943}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2af4fa04ee024374d89caa73039b0b68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  meshRenderer: {fileID: 7213264043989229906}
-  color: {r: 1, g: 0.91049945, b: 0, a: 1}
-  duration: 0.1
 --- !u!95 &7298588971197664779 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 95528395651247964, guid: 3aec22b5d3f3c2947bb81040b56e5f96, type: 3}

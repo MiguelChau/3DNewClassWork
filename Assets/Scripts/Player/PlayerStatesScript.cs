@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class IdleState : StateBase
 {
-    public override void OnStateEnter(object o = null)
+    public override void OnStateEnter(params object[] objs)
     {
         Debug.Log("Entering Idle State");
 
@@ -24,7 +24,7 @@ public class IdleState : StateBase
 
 public class RunningState : StateBase
 {
-    public override void OnStateEnter(object o = null)
+    public override void OnStateEnter(params object[] objs)
     {
         Debug.Log("Entering Running State");
 
@@ -45,7 +45,7 @@ public class RunningState : StateBase
 
 public class JumpingState : StateBase
 {
-    public override void OnStateEnter(object o = null)
+    public override void OnStateEnter(params object[] objs)
     {
         Debug.Log("Entering Jumping State");
 

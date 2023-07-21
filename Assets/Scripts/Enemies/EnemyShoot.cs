@@ -4,20 +4,11 @@ using UnityEngine;
 
 namespace Enemy
 {
-    public class EnemyShoot : EnemyBase
+    public class EnemyShoot : EnemyBaseSM
     {
         public SpelltileBase spelltileBase;
 
-        protected override void Init()
-        {
-            base.Init();
-
-            if(spelltileBase != null)
-            {
-                
-            }
-           
-        }
+     
     }
 
 }
