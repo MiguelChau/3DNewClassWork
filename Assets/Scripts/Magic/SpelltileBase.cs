@@ -23,6 +23,7 @@ public class SpelltileBase : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("hit)");
         foreach (var t in tagsToHit)
         {
             if (collision.transform.tag == t)

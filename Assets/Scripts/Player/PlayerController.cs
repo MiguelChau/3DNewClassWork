@@ -9,7 +9,11 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     public float speed = 1f;
     public float turnSpeed = 1f; 
-    public float gravity = -9.8f; 
+    public float gravity = -9.8f;
+
+    [Header("Keys Moviment")]
+    public KeyCode diagonalLeft = KeyCode.Q;
+    public KeyCode diagonalRight = KeyCode.E;
 
     [Header("Run Setup")]
     public KeyCode keyRun = KeyCode.Z;
@@ -44,6 +48,8 @@ public class PlayerController : MonoBehaviour, IDamageable
 
         var inputAxisVertical = Input.GetAxis("Vertical");
         var inputAxisHorizontal = Input.GetAxis("Horizontal");
+        int diagonalInput = Input.GetKey(diagonalLeft) ? -1 : Input.GetKey(diagonalRight) ? 1 : 0;
+
         var speedVector = transform.forward * inputAxisVertical * speed;
 
         if (characterController.isGrounded)
@@ -78,7 +84,7 @@ public class PlayerController : MonoBehaviour, IDamageable
             float diagonalFactor = Mathf.Sqrt(0.5f);
 
             
-            speedVector = (transform.forward * inputAxisVertical + transform.right * inputAxisHorizontal) * speed * diagonalFactor;
+            speedVector = (transform.forward * inputAxisVertical + transform.right * diagonalInput) * speed * diagonalFactor;
 
             if (Input.GetKey(keyRun))
             {
