@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1135902691193600001}
   - component: {fileID: 8757742065139702812}
   - component: {fileID: 7511461414197718637}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,8 +177,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.293876
-  m_Center: {x: 0, y: 0.008320212, z: -0.02405709}
+  m_Radius: 0.820984
+  m_Center: {x: -0.29376113, y: 0.008320212, z: 0.20928752}
 --- !u!1001 &8364137487821779618
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -189,6 +189,26 @@ PrefabInstance:
     - target: {fileID: 121802, guid: 8f18e1d8c46c51f429429815455062fc, type: 3}
       propertyPath: m_Name
       value: Fireball
+      objectReference: {fileID: 0}
+    - target: {fileID: 121802, guid: 8f18e1d8c46c51f429429815455062fc, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 130866, guid: 8f18e1d8c46c51f429429815455062fc, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 132348, guid: 8f18e1d8c46c51f429429815455062fc, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 160908, guid: 8f18e1d8c46c51f429429815455062fc, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 196570, guid: 8f18e1d8c46c51f429429815455062fc, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 485016, guid: 8f18e1d8c46c51f429429815455062fc, type: 3}
       propertyPath: m_RootOrder

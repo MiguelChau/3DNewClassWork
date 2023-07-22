@@ -18,7 +18,9 @@ namespace Enemy
     public class EnemyBaseSM : MonoBehaviour
     {
         public Collider enemyCollider;
-        public bool lookAtPlayer = false;       
+        public bool lookAtPlayer = false;
+        public Animator enemyAnimator;
+        public float radiusToDetectPlayer = 10f;
 
         [Header("Animation")]
         public float startAnimationDuration = .5f;
@@ -46,7 +48,9 @@ namespace Enemy
 
         private void Start()
         {
+            enemyAnimator = GetComponent<Animator>();
             _player = GameObject.FindObjectOfType<PlayerController>();
+
         }
 
         private void Init()
@@ -101,6 +105,15 @@ namespace Enemy
             if (lookAtPlayer)
             {
                 transform.LookAt(_player.transform.position);
+            }
+
+            
+            float distanceToPlayer = Vector3.Distance(transform.position, _player.transform.position);
+            if (distanceToPlayer <= radiusToDetectPlayer)
+            {
+                SwitchState(EnemyAction.WALK);
+                SwitchState(EnemyAction.ATTACK);
+                StartAttack();
             }
         }
         #endregion
