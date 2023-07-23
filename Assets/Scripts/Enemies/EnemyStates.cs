@@ -15,7 +15,7 @@ namespace Enemy
             base.OnStateEnter(objs);
             enemy = (EnemyBaseSM)objs[0];
         }
-       
+
     }
 
     public class EnemyStateInit : EnemyStatesBase
@@ -79,4 +79,21 @@ namespace Enemy
         }
     }
 
+    public class EnemyStateShoot : EnemyStatesBase
+    {
+        public override void OnStateEnter(params object[] objs)
+        {
+            base.OnStateEnter(objs);
+            EnemyBaseSM enemy = (EnemyBaseSM)objs[0];
+            enemy.StartShoot();
+        }
+
+        public override void OnStateExit()
+        {
+            base.OnStateExit();
+        }
+    }
+
 }
+
+

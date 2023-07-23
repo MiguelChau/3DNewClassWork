@@ -15,7 +15,18 @@ namespace Chau.StateMachine
     public Dictionary<T, StateBase> dictionaryState; 
 
     private StateBase _currentState;
+
+    private T _currentStateType;
+
     public float timetoStartGame = 1f;
+
+        public T CurrentStateType
+        {
+            get
+            {
+                return _currentStateType;
+            }
+        }
     
     public StateBase CurrentState
     {
@@ -37,6 +48,7 @@ namespace Chau.StateMachine
         if (_currentState != null) _currentState.OnStateExit();
 
         _currentState = dictionaryState[state];
+        _currentStateType = state;
 
         _currentState.OnStateEnter(objs);
         

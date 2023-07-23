@@ -63,3 +63,23 @@ public class JumpingState : StateBase
 
     }
 }
+public class DeathState : StateBase
+{
+    public override void OnStateEnter(params object[] objs)
+    {
+        Debug.Log("Entering Death State");
+
+    }
+
+    public override void OnStateStay()
+    {
+        Debug.Log("Death State");
+
+    }
+
+    public override void OnStateExit()
+    {
+        Debug.Log("Exiting Death State");
+
+    }
+}

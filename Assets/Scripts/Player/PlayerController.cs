@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 {
     public Animator myAnimator;
     public CharacterController characterController;
+    public HealthBase healthBase;
 
     public float speed = 1f;
     public float turnSpeed = 1f; 
@@ -35,7 +36,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     public void Damage(float damage)
     {
-        Damage(damage);
+        healthBase.Damage(damage);
     }
 
 

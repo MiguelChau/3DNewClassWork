@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Chau.StateMachine;
 using DG.Tweening;
+using Animation;
 
 namespace Enemy
 {
@@ -13,13 +14,15 @@ namespace Enemy
         IDLE,
         WALK,
         ATTACK,
-        DEATH
+        DEATH,
+        SHOOT
     }
+
     public class EnemyBaseSM : MonoBehaviour
     {
         public Collider enemyCollider;
         public bool lookAtPlayer = false;
-        public Animator enemyAnimator;
+
         public float radiusToDetectPlayer = 10f;
 
         [Header("Animation")]
@@ -34,11 +37,14 @@ namespace Enemy
         public float speed = 5f;
         public List<Transform> waypoints;
 
+        public AnimationBase animationBase;
         public HealthBase healthBase;
 
         private PlayerController _player;
 
-        private StateMachine<EnemyAction> stateMachine;
+        protected internal StateMachine<EnemyAction> stateMachine;
+
+        private bool attacking = false;
 
         private void Awake()
         {
@@ -48,12 +54,10 @@ namespace Enemy
 
         private void Start()
         {
-            enemyAnimator = GetComponent<Animator>();
             _player = GameObject.FindObjectOfType<PlayerController>();
-
         }
 
-        private void Init()
+        protected virtual void Init()
         {
             stateMachine = new StateMachine<EnemyAction>();
             stateMachine.Init();
@@ -62,6 +66,11 @@ namespace Enemy
             stateMachine.RegisterStates(EnemyAction.WALK, new EnemyStateWalk());
             stateMachine.RegisterStates(EnemyAction.ATTACK, new EnemyStateAttack());
             stateMachine.RegisterStates(EnemyAction.DEATH, new EnemyStateDeath());
+
+            if (this is EnemyShooter)
+            {
+                stateMachine.RegisterStates(EnemyAction.SHOOT, new EnemyStateShoot());
+            }
         }
 
         #region HEALTH
@@ -80,6 +89,7 @@ namespace Enemy
         IEnumerator AttackCoroutine(Action endCallback)
         {
             int attacks = 0;
+            attacking = true;
             while (attacks < attackAmount)
             {
                 attacks++;
@@ -88,6 +98,7 @@ namespace Enemy
             }
 
             endCallback?.Invoke();
+            attacking = false;
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -109,11 +120,23 @@ namespace Enemy
 
             
             float distanceToPlayer = Vector3.Distance(transform.position, _player.transform.position);
-            if (distanceToPlayer <= radiusToDetectPlayer)
+            if (distanceToPlayer > radiusToDetectPlayer)
             {
                 SwitchState(EnemyAction.WALK);
+                
+            }
+            else
+            {
                 SwitchState(EnemyAction.ATTACK);
-                StartAttack();
+                if(!attacking)
+                {
+                    StartAttack();
+                }
+
+                if (animationBase != null)
+                {
+                    animationBase.PlayAnimationByTrigger(AnimationType.ATTACK);
+                }
             }
         }
         #endregion
@@ -122,7 +145,12 @@ namespace Enemy
 
         public void GoToRandomPoint(Action onArrive = null)
         {
-            StartCoroutine(GoToPointCoroutine(waypoints[UnityEngine.Random.Range(0, waypoints.Count)], onArrive));
+            if(waypoints.Count > 0)
+            {
+                int randomIndex = UnityEngine.Random.Range(0, waypoints.Count);
+                StartCoroutine(GoToPointCoroutine(waypoints[randomIndex], onArrive));
+            }
+
         }
 
         IEnumerator GoToPointCoroutine(Transform t, Action onArrive = null)
@@ -161,6 +189,15 @@ namespace Enemy
         }
         #endregion
 
+        #region SHOOT
+
+        public virtual void StartShoot(Action endCallback = null)
+        {
+            throw new InvalidOperationException("Just Shooter shoots.");
+        }
+
+        #endregion
+
         #region DEBUG 
         [NaughtyAttributes.Button]
         private void SwitchInit()
@@ -187,8 +224,12 @@ namespace Enemy
         #region STATE MACHINE
         public void SwitchState(EnemyAction state)
         {
-            stateMachine.SwitchState(state, this);
+            if(stateMachine.CurrentStateType != state)
+            {
+                stateMachine.SwitchState(state, this);
+            }
         }
+        
         #endregion
     }
 
