@@ -6,9 +6,9 @@ using Chau.StateMachine;
 using DG.Tweening;
 using Animation;
 
-namespace Enemy
+namespace Boss
 {
-    public enum EnemyAction
+    public enum BossAction
     {
         NONE = 0,
         INIT,
@@ -19,9 +19,9 @@ namespace Enemy
         SHOOT
     }
 
-    public class EnemyBaseSM : MonoBehaviour
+    public class BossBase : MonoBehaviour
     {
-        public Collider enemyCollider;
+        public Collider bossCollider;
         public bool lookAtPlayer = false;
         protected bool _playerDetected = false;
 
@@ -33,10 +33,16 @@ namespace Enemy
         public bool startWithBornAnimation = true;
 
         [Header("Attack")]
-        public int attackAmount = 5;
+        public int attackAmount = 20;
         public float timeBetweenAttacks = .5f;
 
-        public float speed = 5f;
+        [Header("Shoot")]
+        public SpelltileBase spelltileBase;
+        public Transform positionToCast;
+        public float timeBetweenCast = .3f;
+        public float speed = 50f;
+
+        public float bossSpeed = 5f;
         public List<Transform> waypoints;
 
         public AnimationBase animationBase;
@@ -44,9 +50,10 @@ namespace Enemy
 
         private PlayerController _player;
 
-        protected internal StateMachine<EnemyAction> stateMachine;
+        protected internal StateMachine<BossAction> stateMachine;
 
         private bool attacking = false;
+        private Coroutine _currentCoroutine;
 
         private void Awake()
         {
@@ -61,26 +68,22 @@ namespace Enemy
 
         protected virtual void Init()
         {
-            stateMachine = new StateMachine<EnemyAction>();
+            stateMachine = new StateMachine<BossAction>();
             stateMachine.Init();
 
-            stateMachine.RegisterStates(EnemyAction.INIT, new EnemyStateInit());
-            stateMachine.RegisterStates(EnemyAction.WALK, new EnemyStateWalk());
-            stateMachine.RegisterStates(EnemyAction.ATTACK, new EnemyStateAttack());
-            stateMachine.RegisterStates(EnemyAction.DEATH, new EnemyStateDeath());
+            stateMachine.RegisterStates(BossAction.INIT, new BossStateInit());
+            stateMachine.RegisterStates(BossAction.WALK, new BossStateWalk());
+            stateMachine.RegisterStates(BossAction.ATTACK, new BossStateAttack());
+            stateMachine.RegisterStates(BossAction.DEATH, new BossStateDeath());
+            stateMachine.RegisterStates(BossAction.SHOOT, new BossStateShoot());
 
-            if (this is EnemyShooter)
-            {
-                stateMachine.RegisterStates(EnemyAction.SHOOT, new EnemyStateShoot());
-            }
-
-            SwitchState(EnemyAction.INIT);
+            SwitchState(BossAction.INIT);
         }
 
         #region HEALTH
         private void OnEnemyKill(HealthBase h)
         {
-            SwitchState(EnemyAction.DEATH);
+            SwitchState(BossAction.DEATH);
         }
         #endregion
 
@@ -128,25 +131,25 @@ namespace Enemy
             {
                 if (distanceToPlayer > radiusToDetectPlayer)
                 {
-                    SwitchState(EnemyAction.WALK);
+                    SwitchState(BossAction.WALK);
                     _playerDetected = false;
                 }
                 else
                 {
-                    if (this is EnemyShooter)
+                    if (stateMachine.CurrentStateType == BossAction.SHOOT)
                     {
-                        SwitchState(EnemyAction.SHOOT);
+                        SwitchState(BossAction.SHOOT);
                         if (!attacking)
                         {
                             StartShoot(() =>
                             {
-                                SwitchState(EnemyAction.WALK);
+                                SwitchState(BossAction.WALK);
                             });
                         }
                     }
                     else
                     {
-                        SwitchState(EnemyAction.ATTACK);
+                        SwitchState(BossAction.ATTACK);
                         if (!attacking)
                         {
                             StartAttack();
@@ -169,11 +172,51 @@ namespace Enemy
         }
         #endregion
 
+        #region SHOOT
+        public void StartShoot(Action endCallback = null)
+        {
+            StartCoroutine(ShootCoroutine(endCallback));
+        }
+
+        IEnumerator ShootCoroutine(Action endCallback)
+        {
+            int attacks = 0;
+            attacking = true;
+
+            while (attacks < attackAmount)
+            {
+                attacks++;
+                transform.DOScale(1.1f, .1f).SetLoops(2, LoopType.Yoyo);
+
+                // Disparar o projétil
+                CastProjectile();
+
+                yield return new WaitForSeconds(timeBetweenAttacks);
+            }
+
+            endCallback?.Invoke();
+            attacking = false;
+        }
+
+        private void CastProjectile()
+        {
+            MagicBase magicBase = GetComponent<MagicBase>();
+            if (magicBase != null)
+            {
+                magicBase.prefabSpelltile = spelltileBase;
+                magicBase.positionToCast = positionToCast;
+                magicBase.timeBetweenCast = timeBetweenCast;
+                magicBase.speed = speed;
+                magicBase.StartCast();
+            }
+        }
+        #endregion
+
         #region WALK
 
         public void GoToRandomPoint(Action onArrive = null)
         {
-            if(waypoints.Count > 0)
+            if (waypoints.Count > 0)
             {
                 int randomIndex = UnityEngine.Random.Range(0, waypoints.Count);
                 StartCoroutine(GoToPointCoroutine(waypoints[randomIndex], onArrive));
@@ -207,7 +250,7 @@ namespace Enemy
                 BornAnimation();
             }
 
-            SwitchState(EnemyAction.WALK);
+            SwitchState(BossAction.WALK);
         }
 
         private void BornAnimation()
@@ -219,48 +262,16 @@ namespace Enemy
         }
         #endregion
 
-        #region SHOOT
-
-        public virtual void StartShoot(Action endCallback = null)
-        {
-            throw new InvalidOperationException("Just Shooter shoots.");
-        }
-
-        #endregion
-
-        #region DEBUG 
-        [NaughtyAttributes.Button]
-        private void SwitchInit()
-        {
-            SwitchState(EnemyAction.INIT);
-
-        }
-        [NaughtyAttributes.Button]
-
-        private void SwitchWalk()
-        {
-            SwitchState(EnemyAction.WALK);
-
-        }
-        [NaughtyAttributes.Button]
-        private void SwitchAttack()
-        {
-            SwitchState(EnemyAction.ATTACK);
-
-        }
-
-        #endregion
-
         #region STATE MACHINE
-        public void SwitchState(EnemyAction state)
+        public void SwitchState(BossAction state)
         {
-            if(stateMachine.CurrentStateType != state)
+            if (stateMachine.CurrentStateType != state)
             {
                 stateMachine.SwitchState(state, this);
             }
         }
-        
+
         #endregion
     }
-
 }
+

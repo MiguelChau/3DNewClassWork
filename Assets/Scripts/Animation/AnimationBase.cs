@@ -11,6 +11,7 @@ namespace Animation
         IDLE,
         RUN,
         ATTACK,
+        SHOOT,
         DEATH
     }
 
