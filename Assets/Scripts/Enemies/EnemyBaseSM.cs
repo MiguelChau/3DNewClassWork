@@ -22,6 +22,7 @@ namespace Enemy
     {
         public Collider enemyCollider;
         public bool lookAtPlayer = false;
+        protected bool _playerDetected = false;
 
         public float radiusToDetectPlayer = 10f;
 
@@ -120,22 +121,35 @@ namespace Enemy
 
             
             float distanceToPlayer = Vector3.Distance(transform.position, _player.transform.position);
-            if (distanceToPlayer > radiusToDetectPlayer)
+
+            if(_playerDetected)
             {
-                SwitchState(EnemyAction.WALK);
+                if (distanceToPlayer > radiusToDetectPlayer)
+
+                {
+                    SwitchState(EnemyAction.WALK);
+                    _playerDetected = false;
                 
+                }
+                else
+                {
+                    SwitchState(EnemyAction.ATTACK);
+                    if(!attacking)
+                {
+                        StartAttack();
+                }
+
+                    if (animationBase != null)
+                    {
+                        animationBase.PlayAnimationByTrigger(AnimationType.ATTACK);
+                    }
+                }
             }
             else
             {
-                SwitchState(EnemyAction.ATTACK);
-                if(!attacking)
+                if (distanceToPlayer <= radiusToDetectPlayer)
                 {
-                    StartAttack();
-                }
-
-                if (animationBase != null)
-                {
-                    animationBase.PlayAnimationByTrigger(AnimationType.ATTACK);
+                    _playerDetected = true;
                 }
             }
         }

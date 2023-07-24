@@ -26,7 +26,7 @@ public class SpelltileBase : MonoBehaviour
         Debug.Log("hit)");
         foreach (var t in tagsToHit)
         {
-            if (collision.transform.tag == t)
+            if (collision.transform.CompareTag(t))
             {
                 var damageable = collision.transform.GetComponent<IDamageable>();
 

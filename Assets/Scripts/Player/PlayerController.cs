@@ -110,4 +110,10 @@ public class PlayerController : MonoBehaviour, IDamageable
         myAnimator.SetBool("Jump", _isJumping);  
 
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("Collision with player detected.");
+       
+    }
 }

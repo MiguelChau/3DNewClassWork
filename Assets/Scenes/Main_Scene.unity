@@ -16311,8 +16311,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.4541152, y: 1.4628477, z: 0.45265198}
+  m_Center: {x: -0.09944481, y: 0.8258188, z: 0.04276848}
 --- !u!114 &1373078518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16326,7 +16326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startLife: 50
-  destroyOnKill: 0
+  destroyOnKill: 1
   _currentLife: 0
 --- !u!4 &1373834678 stripped
 Transform:
@@ -22430,7 +22430,6 @@ MonoBehaviour:
   animationBase: {fileID: 1938856587}
   healthBase: {fileID: 1938856588}
   enemyMagicBase: {fileID: 1816016184}
-  attackRange: 50
 --- !u!1001 &1939029927
 PrefabInstance:
   m_ObjectHideFlags: 0
