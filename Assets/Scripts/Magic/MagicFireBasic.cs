@@ -12,6 +12,7 @@ public class MagicFireBasic : MagicBase
 
     private float _currentCasts;
     private bool _recharging = false;
+    public bool shouldUpdateUI = true;
 
     private void Awake()
     {
@@ -66,11 +67,19 @@ public class MagicFireBasic : MagicBase
 
     private void UpdateUI()
     {
-        uIGunUpdaters.ForEach(i => i.UpdateValue(maxCast, _currentCasts));
+        if (shouldUpdateUI)
+        {
+            uIGunUpdaters.ForEach(i => i.UpdateValue(maxCast, _currentCasts));
+        }
     }
 
     private void GetAllUIs()
     {
         uIGunUpdaters = GameObject.FindObjectsOfType<UIMagicUpdater>().ToList();
+    }
+
+    public void SetShouldUpdateUI(bool value)
+    {
+        shouldUpdateUI = value;
     }
 }

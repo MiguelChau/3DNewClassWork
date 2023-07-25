@@ -63,7 +63,6 @@ namespace Boss
         private void Start()
         {
             _player = GameObject.FindObjectOfType<PlayerController>();
-            bossMagicBase = GetComponent<MagicBase>();
         }
 
         protected virtual void Init()
@@ -114,7 +113,7 @@ namespace Boss
 
             if (p != null)
             {
-                p.Damage(1);
+                p.Damage(20);
             }
         }
 
@@ -138,6 +137,7 @@ namespace Boss
                 {
                     if (stateMachine.CurrentStateType == BossAction.SHOOT)
                     {
+                        Debug.Log("boss shoot");
                         SwitchState(BossAction.SHOOT);
                         if (!attacking)
                         {
