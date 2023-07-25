@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: -176145620731517345}
   - component: {fileID: 2140191386609368725}
   m_Layer: 3
-  m_Name: PFB_Spelltile
+  m_Name: PFB_SpelltileBoss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -149,8 +149,7 @@ MonoBehaviour:
   damageAmount: 10
   speed: 50
   tagsToHit:
-  - Enemy
-  - Boss
+  - Player
 --- !u!54 &-176145620731517345
 Rigidbody:
   m_ObjectHideFlags: 0

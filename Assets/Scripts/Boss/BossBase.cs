@@ -37,8 +37,7 @@ namespace Boss
         public float timeBetweenAttacks = .5f;
 
         [Header("Shoot")]
-        public SpelltileBase spelltileBase;
-        public Transform positionToCast;
+        public MagicBase bossMagicBase;
         public float timeBetweenCast = .3f;
         public float speed = 50f;
 
@@ -64,6 +63,7 @@ namespace Boss
         private void Start()
         {
             _player = GameObject.FindObjectOfType<PlayerController>();
+            bossMagicBase = GetComponent<MagicBase>();
         }
 
         protected virtual void Init()
@@ -173,43 +173,23 @@ namespace Boss
         #endregion
 
         #region SHOOT
-        public void StartShoot(Action endCallback = null)
+        [NaughtyAttributes.Button]
+        public virtual void StartShoot(Action endCallback = null)
         {
             StartCoroutine(ShootCoroutine(endCallback));
         }
 
-        IEnumerator ShootCoroutine(Action endCallback)
+        private IEnumerator ShootCoroutine(Action endCallback)
         {
-            int attacks = 0;
-            attacking = true;
+            bossMagicBase.StartCast();
 
-            while (attacks < attackAmount)
-            {
-                attacks++;
-                transform.DOScale(1.1f, .1f).SetLoops(2, LoopType.Yoyo);
+            yield return new WaitForSeconds(timeBetweenCast);
 
-                // Disparar o projétil
-                CastProjectile();
-
-                yield return new WaitForSeconds(timeBetweenAttacks);
-            }
 
             endCallback?.Invoke();
-            attacking = false;
         }
 
-        private void CastProjectile()
-        {
-            MagicBase magicBase = GetComponent<MagicBase>();
-            if (magicBase != null)
-            {
-                magicBase.prefabSpelltile = spelltileBase;
-                magicBase.positionToCast = positionToCast;
-                magicBase.timeBetweenCast = timeBetweenCast;
-                magicBase.speed = speed;
-                magicBase.StartCast();
-            }
-        }
+
         #endregion
 
         #region WALK
