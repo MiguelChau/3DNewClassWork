@@ -34,12 +34,13 @@ namespace Boss
         public override void OnStateEnter(params object[] objs)
         {
             base.OnStateEnter(objs);
-            boss.GoToRandomPoint(OnArrive);
+            boss.GoToRandomPoint();
 
         }
+
         private void OnArrive()
         {
-            boss.SwitchState(BossAction.ATTACK);
+            boss.SwitchState(BossAction.PREPARE_ATTACK);
         }
 
         public override void OnStateExit()
@@ -48,18 +49,29 @@ namespace Boss
             boss.StopAllCoroutines();
         }
     }
-    public class BossStateAttack : BossStateMachine
+    public class BossStatePrepareAttack : BossStateMachine
     {
         public override void OnStateEnter(params object[] objs)
         {
             base.OnStateEnter(objs);
-            boss.StartAttack(EndAttacks);
+            boss.PrepareAttack();
 
         }
 
-        private void EndAttacks()
+        public override void OnStateExit()
         {
-            boss.SwitchState(BossAction.WALK);
+            base.OnStateExit();
+            boss.StopAllCoroutines();
+        }
+    }  
+    
+    public class BossStateChargeAttack : BossStateMachine
+    {
+        public override void OnStateEnter(params object[] objs)
+        {
+            base.OnStateEnter(objs);
+            boss.ChargeMelee();
+
         }
 
         public override void OnStateExit()
@@ -89,7 +101,7 @@ namespace Boss
 
         private void EndShoot()
         {
-            boss.SwitchState(BossAction.WALK);
+            boss.SwitchState(BossAction.PREPARE_ATTACK);
         }
 
         public override void OnStateExit()
