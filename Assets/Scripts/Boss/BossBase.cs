@@ -5,6 +5,7 @@ using UnityEngine;
 using Chau.StateMachine;
 using DG.Tweening;
 using Animation;
+using UnityEditor;
 
 namespace Boss
 {
@@ -140,7 +141,7 @@ namespace Boss
         {
             while(Vector3.Distance(transform.position, _player.transform.position) > 3f)
             {
-                Vector3.MoveTowards(transform.position, _player.transform.position, Time.deltaTime * speed);
+                transform.position = Vector3.MoveTowards(transform.position, _player.transform.position, Time.deltaTime * speed);
                 transform.LookAt(_player.transform.position);
                 yield return null;
             }
@@ -161,7 +162,6 @@ namespace Boss
         #endregion
 
         #region SHOOT
-        [NaughtyAttributes.Button]
         public virtual void StartShoot(Action endCallback = null)
         {
             StartCoroutine(ShootCoroutine(endCallback));
@@ -169,12 +169,30 @@ namespace Boss
 
         private IEnumerator ShootCoroutine(Action endCallback)
         {
-            bossMagicBase.StartCast();
+            print($"Starting shoot Coroutine");
+            int numberOfCast = 20;
+            float timeBetweenCast = .5f;
 
-            yield return new WaitForSeconds(timeBetweenCast);
+            animationBase.PlayAnimationByTrigger(AnimationType.ATTACK);
 
+            int shooterCounter = 0;
+            while (shooterCounter < numberOfCast)
+            {
+                transform.LookAt(_player.transform.position);
 
-            endCallback?.Invoke();
+                bossMagicBase.Cast();
+
+                float timeCounter = 0;
+
+                while (timeCounter < timeBetweenCast)
+                {
+                    timeCounter += Time.deltaTime;
+                    yield return null;
+                }
+                shooterCounter++;
+            }
+
+            SwitchState(BossAction.PREPARE_ATTACK);
         }
 
 
@@ -205,7 +223,7 @@ namespace Boss
                 {
                     transform.position = Vector3.MoveTowards(transform.position, waypoints[randomIndex].position, Time.deltaTime * speed);
 
-                    if(Vector3.Distance(transform.position, _player.transform.position) < radiusToDetectPlayer)
+                    if (Vector3.Distance(transform.position, _player.transform.position) < radiusToDetectPlayer)
                     {
 
                         SwitchState(BossAction.PREPARE_ATTACK);
@@ -218,7 +236,7 @@ namespace Boss
                 while(counter < 2f)
                 {
                     counter += Time.deltaTime;
-                    if(Vector3.Distance(transform.position, _player.transform.position) < radiusToDetectPlayer)
+                    if (Vector3.Distance(transform.position, _player.transform.position) < radiusToDetectPlayer)
                     {
                         SwitchState(BossAction.PREPARE_ATTACK);
                     }
@@ -308,5 +326,18 @@ namespace Boss
 
 
         #endregion
+
+        #region GIZMOS
+        private void OnDrawGizmos()
+        {
+            if (_player != null)
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawRay(transform.position, (_player.transform.position - transform.position).normalized * radiusToDetectPlayer);
+            }
+        }
+    
+    
     }
+        #endregion
 }
