@@ -94,6 +94,8 @@ namespace Boss
         #endregion
 
         #region PREPARE_ATTACK
+
+
         public void PrepareAttack()
         {
             StartCoroutine(PrepareAttackCoroutine());
@@ -261,6 +263,49 @@ namespace Boss
                 stateMachine.SwitchState(state, this);
             }
         }
+
+        #endregion
+
+        #region DEBUGS
+        [NaughtyAttributes.Button]
+        private void SwitchInit()
+        {
+            SwitchState(BossAction.INIT);
+
+        }
+
+        [NaughtyAttributes.Button]
+
+        private void SwitchWalk()
+        {
+            SwitchState(BossAction.WALK);
+
+        }
+        
+        [NaughtyAttributes.Button]
+
+        private void SwitchPrepareAttack()
+        {
+            SwitchState(BossAction.PREPARE_ATTACK);
+
+        } 
+        
+        [NaughtyAttributes.Button]
+
+        private void SwitchChargeAttack()
+        {
+            SwitchState(BossAction.CHARGE_MELEE);
+
+        }
+        
+        [NaughtyAttributes.Button]
+
+        private void SwitchStartShoot()
+        {
+            SwitchState(BossAction.SHOOT);
+
+        }
+
 
         #endregion
     }

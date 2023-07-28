@@ -13252,7 +13252,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1125402705}
-  m_LocalRotation: {x: -0.017336074, y: 0.9778215, z: -0.090019, w: -0.18831122}
+  m_LocalRotation: {x: -0.017336076, y: 0.9778215, z: -0.090019, w: -0.1883112}
   m_LocalPosition: {x: 2, y: 2.233, z: 23.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -17081,7 +17081,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1407454481}
-  m_LocalRotation: {x: -0.017336074, y: 0.9778215, z: -0.090019, w: -0.18831122}
+  m_LocalRotation: {x: -0.017336076, y: 0.9778215, z: -0.090019, w: -0.1883112}
   m_LocalPosition: {x: 2, y: 2.233, z: 23.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -18128,7 +18128,7 @@ MonoBehaviour:
   animator: {fileID: 2055258693}
   animationSetups:
   - animationType: 0
-    trigger: None
+    trigger: Sleep
   - animationType: 1
     trigger: Idle
   - animationType: 2
@@ -18136,7 +18136,7 @@ MonoBehaviour:
   - animationType: 3
     trigger: Basic Attack
   - animationType: 4
-    trigger: FireballShoot
+    trigger: Fireball Shoot
   - animationType: 5
     trigger: Death
 --- !u!4 &1496902529 stripped
