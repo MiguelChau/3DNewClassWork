@@ -57,13 +57,18 @@ namespace Boss
 
         private void Awake()
         {
+            _player = GameObject.FindObjectOfType<PlayerController>();
+            if (_player == null)
+            {
+                Debug.LogError("PlayerController não encontrado!");
+            }
             Init();
             healthBase.OnKill += OnEnemyKill;
         }
 
         private void Start()
         {
-            _player = GameObject.FindObjectOfType<PlayerController>();
+            StartInitAnimation();
         }
 
         protected virtual void Init()
@@ -116,6 +121,7 @@ namespace Boss
 
             if (p != null)
             {
+                Debug.Log("Boss detectou o jogador e está causando dano.");
                 p.Damage(20);
             }
         }
@@ -176,7 +182,13 @@ namespace Boss
 
        public void GoToRandomPoint()
         {
-            if(waypoints.Count > 0)
+            if (_player == null)
+            {
+                Debug.LogWarning("Referência para o jogador não encontrada.");
+                return;
+            }
+
+            if (waypoints.Count > 0)
             {
                 _currentCoroutine = StartCoroutine(GoToPointCoroutine());
             }
@@ -193,6 +205,7 @@ namespace Boss
 
                     if(Vector3.Distance(transform.position, _player.transform.position) < radiusToDetectPlayer)
                     {
+
                         SwitchState(BossAction.PREPARE_ATTACK);
                     }
 

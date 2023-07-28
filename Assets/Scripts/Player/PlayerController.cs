@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Boss;
 
 public class PlayerController : MonoBehaviour, IDamageable
 {
@@ -114,6 +115,12 @@ public class PlayerController : MonoBehaviour, IDamageable
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log("Collision with player detected.");
-       
+        BossBase boss = collision.gameObject.GetComponent<BossBase>();
+        if (boss != null)
+        {
+            
+            boss.PrepareAttack();
+        }
+
     }
 }

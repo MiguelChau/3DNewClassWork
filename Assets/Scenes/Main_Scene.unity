@@ -13252,7 +13252,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1125402705}
-  m_LocalRotation: {x: -0.017336076, y: 0.9778215, z: -0.090019, w: -0.1883112}
+  m_LocalRotation: {x: -0.017336074, y: 0.9778215, z: -0.090019, w: -0.18831122}
   m_LocalPosition: {x: 2, y: 2.233, z: 23.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -17081,7 +17081,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1407454481}
-  m_LocalRotation: {x: -0.017336076, y: 0.9778215, z: -0.090019, w: -0.1883112}
+  m_LocalRotation: {x: -0.017336074, y: 0.9778215, z: -0.090019, w: -0.18831122}
   m_LocalPosition: {x: 2, y: 2.233, z: 23.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -18067,7 +18067,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bossCollider: {fileID: 1493439338}
   lookAtPlayer: 1
-  radiusToDetectPlayer: 20
+  radiusToDetectPlayer: 30
   startAnimationDuration: 0.5
   startAnimationEase: 31
   startWithBornAnimation: 1
@@ -18408,7 +18408,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1540067014
 Transform:
   m_ObjectHideFlags: 0
