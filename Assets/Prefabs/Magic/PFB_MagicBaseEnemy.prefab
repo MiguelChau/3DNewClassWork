@@ -99,7 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabSpelltile: {fileID: 2453895476040628167, guid: 4c61900b168b7c34d8d9b27239ca91b0, type: 3}
   positionToCast: {fileID: 6991829639774017396}
-  timeBetweenCast: 0.3
+  timeBetweenCast: 0.6
   speed: 50
 --- !u!1 &6991829639774017397
 GameObject:

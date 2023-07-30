@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MagicFireBasic : MagicBase
 {
-    public List<UIMagicUpdater> uIGunUpdaters;
+    public List<UIFillUpdater> uIUpdaters;
 
     public float maxCast = 10f;
     public float timeToRecharge = 1f;
@@ -58,7 +58,7 @@ public class MagicFireBasic : MagicBase
         while (time < timeToRecharge)
         {
             time += Time.deltaTime;
-            uIGunUpdaters.ForEach(i => i.UpdateValue(time / timeToRecharge));
+            uIUpdaters.ForEach(i => i.UpdateValue(time / timeToRecharge));
             yield return new WaitForEndOfFrame();
         }
         _currentCasts = 0;
@@ -69,13 +69,13 @@ public class MagicFireBasic : MagicBase
     {
         if (shouldUpdateUI)
         {
-            uIGunUpdaters.ForEach(i => i.UpdateValue(maxCast, _currentCasts));
+            uIUpdaters.ForEach(i => i.UpdateValue(maxCast, _currentCasts));
         }
     }
 
     private void GetAllUIs()
     {
-        uIGunUpdaters = GameObject.FindObjectsOfType<UIMagicUpdater>().ToList();
+        uIUpdaters = GameObject.FindObjectsOfType<UIFillUpdater>().ToList();
     }
 
     public void SetShouldUpdateUI(bool value)

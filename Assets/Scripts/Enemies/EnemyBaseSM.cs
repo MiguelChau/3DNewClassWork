@@ -94,6 +94,7 @@ namespace Enemy
         {
             int attacks = 0;
             attacking = true;
+            //animationBase.PlayAnimationByTrigger(AnimationType.ATTACK);
             while (attacks < attackAmount)
             {
                 attacks++;
@@ -111,7 +112,7 @@ namespace Enemy
 
             if (p != null)
             {
-                p.Damage(1);
+                p.healthBase.Damage(1);
             }
         }
 

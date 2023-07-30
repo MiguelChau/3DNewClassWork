@@ -2,12 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Boss;
+using Enemy;
 
-public class PlayerController : MonoBehaviour, IDamageable
+public class PlayerController : MonoBehaviour//, IDamageable
 {
+    public List<Collider> playerColliders;
     public Animator myAnimator;
     public CharacterController characterController;
+
+    [Header("Life")]
     public HealthBase healthBase;
+    private bool _alive = true;
 
     public float speed = 1f;
     public float turnSpeed = 1f; 
@@ -29,16 +34,61 @@ public class PlayerController : MonoBehaviour, IDamageable
     private float vSpeed = 0f;
     public PlayerStateMachine _playerStateMachine;
 
-    private void Start()
+    private void OnValidate()
     {
-        _playerStateMachine = new PlayerStateMachine();
-        _playerStateMachine.Init();
+        if (healthBase == null) healthBase = GetComponent<HealthBase>();
     }
 
-    public void Damage(float damage)
+    private void Awake()
     {
-        healthBase.Damage(damage);
+        OnValidate();
+
+        healthBase.OnDamage += Damage;
+        healthBase.OnKill += OnKill;
+
     }
+
+    private void Start()
+    {
+        _playerStateMachine = new PlayerStateMachine(myAnimator);
+        _playerStateMachine.Init();
+
+    }
+
+   
+    #region LIFE
+    private void OnKill(HealthBase h)
+    {
+        if (_alive)
+        {
+            _alive = false;
+            _playerStateMachine.Death(h);
+            playerColliders.ForEach(i => i.enabled = false);
+
+            Invoke(nameof(RevivePlayer), 3f);
+        }
+    }
+
+    public void Damage(HealthBase h)
+    {
+        Debug.Log("Player took Damage");
+    }
+
+    private void RevivePlayer()
+    {
+        _playerStateMachine.Revive();
+        _alive = true;
+        healthBase.ResetLife();
+        RespawnPlayer();
+        Invoke(nameof(TurnOnColliders), .1f);
+    }
+
+    private void TurnOnColliders()
+    {
+        playerColliders.ForEach(i => i.enabled = true);
+    }
+
+    #endregion
 
 
     private void Update()
@@ -122,5 +172,19 @@ public class PlayerController : MonoBehaviour, IDamageable
             boss.PrepareAttack();
         }
 
+        EnemyBaseSM enemy = collision.gameObject.GetComponent<EnemyBaseSM>();
+        if( enemy != null)
+        {
+            enemy.StartAttack();
+        }
+
+    }
+
+    public void RespawnPlayer()
+    {
+        if (CheckPointManager.Instance.HasCheckPoint())
+        {
+            transform.position = CheckPointManager.Instance.GetPositionFromLastCheckPoint();
+        }
     }
 }

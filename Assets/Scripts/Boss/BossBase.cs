@@ -108,7 +108,7 @@ namespace Boss
 
             float random = UnityEngine.Random.Range(0f, 1f);
 
-            if(random < 0.5f)
+            if (random < 0.5f)
             {
                 SwitchState(BossAction.SHOOT);
             }
@@ -125,7 +125,7 @@ namespace Boss
             if (p != null)
             {
                 Debug.Log("Boss detectou o jogador e está causando dano.");
-                p.Damage(20);
+                p.healthBase.Damage(20);
             }
         }
 
@@ -139,7 +139,7 @@ namespace Boss
 
         IEnumerator ChargeMeleeCoroutine()
         {
-            while(Vector3.Distance(transform.position, _player.transform.position) > 3f)
+            while (Vector3.Distance(transform.position, _player.transform.position) > 3f)
             {
                 transform.position = Vector3.MoveTowards(transform.position, _player.transform.position, Time.deltaTime * speed);
                 transform.LookAt(_player.transform.position);
@@ -149,7 +149,7 @@ namespace Boss
             int attacks = 0;
             attacking = true;
             animationBase.PlayAnimationByTrigger(AnimationType.ATTACK);
-            while(attacks < attackAmount)
+            while (attacks < attackAmount)
             {
                 attacks++;
                 transform.DOScale(1.1f, .1f).SetLoops(2, LoopType.Yoyo);
@@ -200,7 +200,7 @@ namespace Boss
 
         #region WALK
 
-       public void GoToRandomPoint()
+        public void GoToRandomPoint()
         {
             if (_player == null)
             {
@@ -233,7 +233,7 @@ namespace Boss
                 }
 
                 float counter = 0;
-                while(counter < 2f)
+                while (counter < 2f)
                 {
                     counter += Time.deltaTime;
                     if (Vector3.Distance(transform.position, _player.transform.position) < radiusToDetectPlayer)
@@ -299,15 +299,15 @@ namespace Boss
             SwitchState(BossAction.WALK);
 
         }
-        
+
         [NaughtyAttributes.Button]
 
         private void SwitchPrepareAttack()
         {
             SwitchState(BossAction.PREPARE_ATTACK);
 
-        } 
-        
+        }
+
         [NaughtyAttributes.Button]
 
         private void SwitchChargeAttack()
@@ -315,7 +315,7 @@ namespace Boss
             SwitchState(BossAction.CHARGE_MELEE);
 
         }
-        
+
         [NaughtyAttributes.Button]
 
         private void SwitchStartShoot()
@@ -326,8 +326,9 @@ namespace Boss
 
 
         #endregion
+    }
 
-        #region GIZMOS
+       /* #region GIZMOS
         private void OnDrawGizmos()
         {
             if (_player != null)
@@ -339,5 +340,5 @@ namespace Boss
     
     
     }
-        #endregion
+        #endregion*/
 }

@@ -16,9 +16,10 @@ public enum PlayerStates
 [Serializable]
 public class PlayerStateMachine : StateMachine<PlayerStates>
 {
-
+    private Animator _animator;
     public override void Init()
     {
+        
         base.Init();
         RegisterStates(PlayerStates.IDLE, new IdleState());
         RegisterStates(PlayerStates.RUN, new RunningState());
@@ -27,6 +28,12 @@ public class PlayerStateMachine : StateMachine<PlayerStates>
 
         SwitchState(PlayerStates.IDLE);
     }    
+
+    public PlayerStateMachine(Animator animator)
+    {
+        _animator = animator;
+        Init();
+    }
         
 
      public void MoveForward()
@@ -47,6 +54,19 @@ public class PlayerStateMachine : StateMachine<PlayerStates>
     public void Death(HealthBase h)
     {
         SwitchState(PlayerStates.DEATH);
+        if(_animator != null)
+        {
+            _animator.SetTrigger("Death");
+        }
+    }
+
+    public void Revive()
+    {
+        SwitchState(PlayerStates.IDLE);
+        if (_animator != null)
+        {
+            _animator.SetTrigger("Revive");
+        }
     }
 }
 

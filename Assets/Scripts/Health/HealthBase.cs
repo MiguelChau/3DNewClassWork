@@ -11,6 +11,8 @@ public class HealthBase : MonoBehaviour, IDamageable
     public Action<HealthBase> OnDamage;
     public Action<HealthBase> OnKill;
 
+    public List<UIFillUpdater> uiFillUpdater;
+
     private void Awake()
     {
         Init();
@@ -33,21 +35,24 @@ public class HealthBase : MonoBehaviour, IDamageable
         OnKill?.Invoke(this);
     }
 
-    [NaughtyAttributes.Button]
-    public void Damage()
-    {
-        Damage(5);
-    }
-
     public void Damage(float f)
     {
-        Debug.Log("HitDmg");
+       
         _currentLife -= f;
 
         if (_currentLife <= 0)
         {
             Kill();
         }
+        UpdateUI();
         OnDamage?.Invoke(this);
+    }
+
+    private void UpdateUI()
+    {
+        if (uiFillUpdater != null)
+        {
+            uiFillUpdater.ForEach(i => i.UpdateValue((float)_currentLife / startLife));
+        }
     }
 }
