@@ -170,6 +170,11 @@ namespace Enemy
         }
         #endregion
 
+        private void OnDisable()
+        {
+            transform.DOKill();
+        }
+
         #region WALK
 
         public void GoToRandomPoint(Action onArrive = null)
