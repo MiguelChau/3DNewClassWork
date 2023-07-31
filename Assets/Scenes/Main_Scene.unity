@@ -13882,7 +13882,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1125402705}
-  m_LocalRotation: {x: -0.017336074, y: 0.9778215, z: -0.090019, w: -0.18831122}
+  m_LocalRotation: {x: -0.017336076, y: 0.9778215, z: -0.090019, w: -0.1883112}
   m_LocalPosition: {x: 2, y: 2.233, z: 23.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -17714,7 +17714,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1407454481}
-  m_LocalRotation: {x: -0.017336074, y: 0.9778215, z: -0.090019, w: -0.18831122}
+  m_LocalRotation: {x: -0.017336076, y: 0.9778215, z: -0.090019, w: -0.1883112}
   m_LocalPosition: {x: 2, y: 2.233, z: 23.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -18706,7 +18706,7 @@ MonoBehaviour:
   startWithBornAnimation: 1
   attackAmount: 20
   timeBetweenAttacks: 3
-  bossMagicBase: {fileID: 1904368931}
+  bossMagicBase: {fileID: 1943238265976018938, guid: 9a90874a553bf574e8b67b513afbbab0, type: 3}
   timeBetweenCast: 3
   speed: 50
   bossSpeed: 5
@@ -23566,17 +23566,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 445910, guid: c63ea781a273235439e583799176c846, type: 3}
   m_PrefabInstance: {fileID: 1869180047}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1904368931 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5360364885928127782, guid: 88e480c990c9d6a458b5fc85fe1da2aa, type: 3}
-  m_PrefabInstance: {fileID: 2055258691}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8280c349b51ef394a91b9ecbc3c5fd83, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1911933110
 GameObject:
   m_ObjectHideFlags: 0

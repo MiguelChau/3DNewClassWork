@@ -11,6 +11,7 @@ public class SpelltileBase : MonoBehaviour
 
     public List<string> tagsToHit;
 
+    public Vector3? direction = null;
 
     private void Awake()
     {
@@ -18,7 +19,8 @@ public class SpelltileBase : MonoBehaviour
     }
     private void Update()
     {
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        //transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        transform.position += (direction != null ? direction.Value : transform.forward) * speed * Time.deltaTime;
     }
 
     private void OnCollisionEnter(Collision collision)

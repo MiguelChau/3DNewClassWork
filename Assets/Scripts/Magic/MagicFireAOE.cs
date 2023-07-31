@@ -7,7 +7,7 @@ public class MagicFireAOE : MagicFireBasic
     public int amountPerCast = 4;
     public float angle = 15f;
 
-    public override void Cast()
+    public  void CastAOE(Transform target = null)
     {
         int mult = 0; 
 
@@ -23,7 +23,8 @@ public class MagicFireAOE : MagicFireBasic
 
             projectile.transform.localPosition = Vector3.zero; 
             projectile.transform.localEulerAngles = Vector3.zero + Vector3.up * (i % 2 == 0 ? angle : -angle) * mult; 
-            projectile.speed = speed; 
+            projectile.speed = speed;
+            projectile.direction = (target.position - projectile.transform.position).normalized;
             projectile.transform.parent = null;
         }
 

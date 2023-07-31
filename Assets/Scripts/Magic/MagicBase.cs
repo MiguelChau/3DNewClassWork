@@ -21,11 +21,12 @@ public class MagicBase : MonoBehaviour
         }
     }
 
-    public virtual void Cast()
+    public virtual void Cast(Transform target = null)
     {
         var projectile = Instantiate(prefabSpelltile);
         projectile.transform.position = positionToCast.position;
         projectile.transform.rotation = positionToCast.rotation;
+        projectile.direction = (target.position - projectile.transform.position).normalized;
         projectile.speed = speed;
     }
 
