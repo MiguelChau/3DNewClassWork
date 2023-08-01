@@ -26,7 +26,7 @@ public class MagicBase : MonoBehaviour
         var projectile = Instantiate(prefabSpelltile);
         projectile.transform.position = positionToCast.position;
         projectile.transform.rotation = positionToCast.rotation;
-        projectile.direction = (target.position - projectile.transform.position).normalized;
+        projectile.direction = target != null ? (target.position - projectile.transform.position).normalized : null;
         projectile.speed = speed;
     }
 
