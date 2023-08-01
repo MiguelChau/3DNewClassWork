@@ -4,7 +4,7 @@ using UnityEngine;
 using Boss;
 using Enemy;
 
-public class PlayerController : MonoBehaviour//, IDamageable
+public class PlayerController : MonoBehaviour
 {
     public List<Collider> playerColliders;
     public Animator myAnimator;
@@ -72,6 +72,7 @@ public class PlayerController : MonoBehaviour//, IDamageable
     public void Damage(HealthBase h)
     {
         Debug.Log("Player took Damage");
+
     }
 
     private void RevivePlayer()
