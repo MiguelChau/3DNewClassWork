@@ -132,6 +132,8 @@ MonoBehaviour:
   positionToCast: {fileID: 2276641910748055308}
   timeBetweenCast: 0.3
   speed: 40
-  uIGunUpdaters: []
+  uIUpdaters:
+  - {fileID: 0}
   maxCast: 10
   timeToRecharge: 1
+  shouldUpdateUI: 1

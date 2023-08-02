@@ -271,6 +271,54 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 19810394, guid: 8f18e1d8c46c51f429429815455062fc, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19810394, guid: 8f18e1d8c46c51f429429815455062fc, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19810394, guid: 8f18e1d8c46c51f429429815455062fc, type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19810394, guid: 8f18e1d8c46c51f429429815455062fc, type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19886674, guid: 8f18e1d8c46c51f429429815455062fc, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19886674, guid: 8f18e1d8c46c51f429429815455062fc, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19886674, guid: 8f18e1d8c46c51f429429815455062fc, type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19886674, guid: 8f18e1d8c46c51f429429815455062fc, type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19899590, guid: 8f18e1d8c46c51f429429815455062fc, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19899590, guid: 8f18e1d8c46c51f429429815455062fc, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19899590, guid: 8f18e1d8c46c51f429429815455062fc, type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19899590, guid: 8f18e1d8c46c51f429429815455062fc, type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 13546184, guid: 8f18e1d8c46c51f429429815455062fc, type: 3}
     - {fileID: 5453920, guid: 8f18e1d8c46c51f429429815455062fc, type: 3}

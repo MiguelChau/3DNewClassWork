@@ -25,21 +25,25 @@ public class SpelltileBase : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("hit)");
-        foreach (var t in tagsToHit)
+        //Debug.Log("hit)");
+        if (collision.gameObject != this.gameObject)
         {
-            if (collision.transform.CompareTag(t))
-            {
-                var damageable = collision.transform.GetComponent<IDamageable>();
-
-                if (damageable != null)
+            foreach (var t in tagsToHit)
+            { 
+        
+                if (collision.transform.CompareTag(t))
                 {
+                    var damageable = collision.transform.GetComponent<IDamageable>();
 
-                    damageable.Damage(damageAmount);
+                    if (damageable != null)
+                    {
 
+                        damageable.Damage(damageAmount);
+
+                    }
+
+                    break;
                 }
-
-                break;
             }
 
         }
