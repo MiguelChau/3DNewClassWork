@@ -23,11 +23,20 @@ namespace Boss
 
     public class BossBase : MonoBehaviour
     {
+        private enum BossAttackStage
+        {
+            none,
+            Shoot,
+            Melee
+        }
+
         public Collider bossCollider;
         public bool lookAtPlayer = false;
         protected bool _playerDetected = false;
 
         public float radiusToDetectPlayer = 10f;
+        public Color gizmoColor = Color.red;
+        public float attackRadius = 5f;
 
         [Header("Animation")]
         public float startAnimationDuration = .5f;
@@ -35,6 +44,8 @@ namespace Boss
         public bool startWithBornAnimation = true;
 
         [Header("Attack")]
+        public Transform jawTipTransform;
+        public float biteRadius = 2f;
         public int attackAmount = 20;
         public float timeBetweenAttacks = .5f;
 
@@ -55,6 +66,8 @@ namespace Boss
 
         private bool attacking = false;
         private Coroutine _currentCoroutine;
+
+        private BossAttackStage attackStage = BossAttackStage.none;
 
         private void Awake()
         {
@@ -86,6 +99,58 @@ namespace Boss
 
             SwitchState(BossAction.INIT);
         }
+
+
+        #region ANIMATION
+
+        public void AttackAnimationEvent()
+        {
+            if(attackStage == BossAttackStage.Melee)
+            {
+                var colliders = Physics.OverlapSphere(jawTipTransform.position, biteRadius);
+                for(int i = 0; i < colliders.Length; ++i)
+                {
+                    if (colliders[i].gameObject.tag == "Boss")
+                        continue;
+
+                    if(colliders[i].gameObject.TryGetComponent<IDamageable>(out var dmg))
+                    {
+                        dmg.Damage(20f);
+                    }
+                }
+            }
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = gizmoColor;
+            Gizmos.DrawWireSphere(transform.position, attackRadius);
+        }
+        public void StartInitAnimation()
+        {
+            HealthBase healthBase = GetComponent<HealthBase>();
+            if (healthBase != null)
+            {
+                healthBase.ResetLife();
+            }
+
+            if (startWithBornAnimation)
+            {
+                BornAnimation();
+            }
+
+            SwitchState(BossAction.WALK);
+        }
+
+        private void BornAnimation()
+        {
+            transform.localScale = Vector3.zero;
+
+            transform.DOScale(Vector3.one, startAnimationDuration)
+                .SetEase(startAnimationEase);
+        }
+        #endregion
+
 
         #region HEALTH
         private void OnEnemyKill(HealthBase h)
@@ -139,6 +204,8 @@ namespace Boss
 
         IEnumerator ChargeMeleeCoroutine()
         {
+            attackStage = BossAttackStage.Melee;
+
             while (Vector3.Distance(transform.position, _player.transform.position) > 3f)
             {
                 transform.position = Vector3.MoveTowards(transform.position, _player.transform.position, Time.deltaTime * speed);
@@ -157,6 +224,8 @@ namespace Boss
             }
             attacking = false;
 
+            attackStage = BossAttackStage.none;
+
             SwitchState(BossAction.PREPARE_ATTACK);
         }
         #endregion
@@ -170,6 +239,9 @@ namespace Boss
         private IEnumerator ShootCoroutine(Action endCallback)
         {
             print($"Starting shoot Coroutine");
+
+            attackStage = BossAttackStage.Shoot;
+
             int numberOfCast = 20;
             float timeBetweenCast = .5f;
 
@@ -191,6 +263,8 @@ namespace Boss
                 }
                 shooterCounter++;
             }
+
+            attackStage = BossAttackStage.none;
 
             SwitchState(BossAction.PREPARE_ATTACK);
         }
@@ -247,31 +321,6 @@ namespace Boss
 
         #endregion
 
-        #region ANIMATION
-        public void StartInitAnimation()
-        {
-            HealthBase healthBase = GetComponent<HealthBase>();
-            if (healthBase != null)
-            {
-                healthBase.ResetLife();
-            }
-
-            if (startWithBornAnimation)
-            {
-                BornAnimation();
-            }
-
-            SwitchState(BossAction.WALK);
-        }
-
-        private void BornAnimation()
-        {
-            transform.localScale = Vector3.zero;
-
-            transform.DOScale(Vector3.one, startAnimationDuration)
-                .SetEase(startAnimationEase);
-        }
-        #endregion
 
         #region STATE MACHINE
         public void SwitchState(BossAction state)
