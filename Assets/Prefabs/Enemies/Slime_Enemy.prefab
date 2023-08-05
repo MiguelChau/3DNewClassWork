@@ -163,7 +163,7 @@ MonoBehaviour:
   animationBase: {fileID: 994294763146595877}
   healthBase: {fileID: 994294763146595874}
   enemyMagicBase: {fileID: 4877323751242294710}
-  timeBetweenCast: 0.3
+  timeBetweenCast: 1.2
 --- !u!65 &994294763146595872
 BoxCollider:
   m_ObjectHideFlags: 0
