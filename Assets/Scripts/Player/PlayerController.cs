@@ -72,7 +72,16 @@ public class PlayerController : MonoBehaviour
     public void Damage(HealthBase h)
     {
         Debug.Log("Player took Damage");
+        if ((float)h._currentLife / h.startLife < 0.5f)
+        {
+            EffectsManager.Instance.ChangeVignette(true);
+        }
+        else
+        {
+            EffectsManager.Instance.ChangeVignette(false);
+        }
 
+        ShakeCameraOnDamage.Instance.ShakeCam();
     }
 
     private void RevivePlayer()
