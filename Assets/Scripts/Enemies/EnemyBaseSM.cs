@@ -106,7 +106,7 @@ namespace Enemy
 
                     if (colliders[i].gameObject.TryGetComponent<IDamageable>(out var dmg))
                     {
-                        dmg.Damage(20f);
+                        dmg.Damage(5f);
                     }
                 }
             }
