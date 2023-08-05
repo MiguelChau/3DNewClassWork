@@ -21,6 +21,12 @@ namespace Enemy
 
     public class EnemyBaseSM : MonoBehaviour
     {
+        private enum EnemyAttackStage
+        {
+            None,
+            Melee
+        }
+
         public Collider enemyCollider;
         public bool lookAtPlayer = false;
         protected bool _playerDetected = false;
@@ -33,6 +39,8 @@ namespace Enemy
         public bool startWithBornAnimation = true;
 
         [Header("Attack")]
+        public Transform hornMidTipTransform;
+        public float hornRadius = 2f;
         public int attackAmount = 5;
         public float timeBetweenAttacks = .5f;
 
@@ -48,15 +56,22 @@ namespace Enemy
 
         private bool attacking = false;
 
+        private EnemyAttackStage attackStage = EnemyAttackStage.None;
+
         private void Awake()
         {
+            _player = GameObject.FindObjectOfType<PlayerController>();
+            if (_player == null)
+            {
+                Debug.LogError("PlayerController não encontrado!");
+            }
             Init();
             healthBase.OnKill += OnEnemyKill;
         }
 
         private void Start()
         {
-            _player = GameObject.FindObjectOfType<PlayerController>();
+            StartInitAnimation();
         }
 
         protected virtual void Init()
@@ -77,6 +92,50 @@ namespace Enemy
             SwitchState(EnemyAction.INIT);
         }
 
+        #region ANIMATION
+
+        public void AttackAnimationEvent()
+        {
+            if (attackStage == EnemyAttackStage.Melee)
+            {
+                var colliders = Physics.OverlapSphere(hornMidTipTransform.position, hornRadius);
+                for (int i = 0; i < colliders.Length; ++i)
+                {
+                    if (colliders[i].gameObject.tag == "Enemy")
+                        continue;
+
+                    if (colliders[i].gameObject.TryGetComponent<IDamageable>(out var dmg))
+                    {
+                        dmg.Damage(20f);
+                    }
+                }
+            }
+        }
+        public void StartInitAnimation()
+        {
+            HealthBase healthBase = GetComponent<HealthBase>();
+            if (healthBase != null)
+            {
+                healthBase.ResetLife();
+            }
+
+            if (startWithBornAnimation)
+            {
+                BornAnimation();
+            }
+
+            SwitchState(EnemyAction.WALK);
+        }
+
+        private void BornAnimation()
+        {
+            transform.localScale = Vector3.zero;
+
+            transform.DOScale(Vector3.one, startAnimationDuration)
+                .SetEase(startAnimationEase);
+        }
+        #endregion
+
         #region HEALTH
         private void OnEnemyKill(HealthBase h)
         {
@@ -92,6 +151,8 @@ namespace Enemy
 
         IEnumerator AttackCoroutine(Action endCallback)
         {
+            attackStage = EnemyAttackStage.Melee;
+
             int attacks = 0;
             attacking = true;
             //animationBase.PlayAnimationByTrigger(AnimationType.ATTACK);
@@ -104,6 +165,8 @@ namespace Enemy
 
             endCallback?.Invoke();
             attacking = false;
+
+            attackStage = EnemyAttackStage.None;
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -199,31 +262,7 @@ namespace Enemy
         }
         #endregion
 
-        #region ANIMATION
-        public void StartInitAnimation()
-        {
-            HealthBase healthBase = GetComponent<HealthBase>();
-            if (healthBase != null)
-            {
-                healthBase.ResetLife();
-            }
-
-            if (startWithBornAnimation)
-            {
-                BornAnimation();
-            }
-
-            SwitchState(EnemyAction.WALK);
-        }
-
-        private void BornAnimation()
-        {
-            transform.localScale = Vector3.zero;
-
-            transform.DOScale(Vector3.one, startAnimationDuration)
-                .SetEase(startAnimationEase);
-        }
-        #endregion
+        
 
         #region SHOOT
 
