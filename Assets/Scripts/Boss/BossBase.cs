@@ -124,7 +124,7 @@ namespace Boss
         private void OnDrawGizmos()
         {
             Gizmos.color = gizmoColor;
-            Gizmos.DrawWireSphere(transform.position, attackRadius);
+            Gizmos.DrawWireSphere(jawTipTransform.position, attackRadius);
         }
         public void StartInitAnimation()
         {
