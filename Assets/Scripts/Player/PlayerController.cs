@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Boss;
 using Enemy;
+using Core.Singleton;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Singleton<PlayerController>
 {
     public List<Collider> playerColliders;
     public Animator myAnimator;
@@ -29,8 +30,10 @@ public class PlayerController : MonoBehaviour
     [Header("Jump Setup")]
     public float jumpSpeed = 15f;
     private bool _isJumping = false;
-    
 
+    private bool isInvulnerable = false;
+    private float invulnerabilityDuration = 5f;
+    private float invulnerabilityTimer = 0f;
     private float vSpeed = 0f;
     public PlayerStateMachine _playerStateMachine;
 
@@ -39,13 +42,13 @@ public class PlayerController : MonoBehaviour
         if (healthBase == null) healthBase = GetComponent<HealthBase>();
     }
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         OnValidate();
 
         healthBase.OnDamage += Damage;
         healthBase.OnKill += OnKill;
-
     }
 
     private void Start()
@@ -82,6 +85,11 @@ public class PlayerController : MonoBehaviour
         }
 
         ShakeCameraOnDamage.Instance.ShakeCam();
+
+        if (isInvulnerable)
+        {
+            return; 
+        }
     }
 
     private void RevivePlayer()
@@ -168,7 +176,16 @@ public class PlayerController : MonoBehaviour
 
 
         myAnimator.SetBool("Run", isWalking);  
-        myAnimator.SetBool("Jump", _isJumping);  
+        myAnimator.SetBool("Jump", _isJumping);
+
+        if (isInvulnerable)
+        {
+            invulnerabilityTimer -= Time.deltaTime;
+            if (invulnerabilityTimer <= 0f)
+            {
+                isInvulnerable = false;
+            }
+        }
 
     }
 
@@ -198,5 +215,11 @@ public class PlayerController : MonoBehaviour
             transform.position = CheckPointManager.Instance.GetPositionFromLastCheckPoint();
             characterController.enabled = true;
         }
+    }
+
+    public void SetInvencible(float duration)
+    {
+        isInvulnerable = true;
+        invulnerabilityTimer = duration;
     }
 }
