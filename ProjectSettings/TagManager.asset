@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Trigger
   - Boss
+  - PowerInvencible
   layers:
   - Default
   - TransparentFX

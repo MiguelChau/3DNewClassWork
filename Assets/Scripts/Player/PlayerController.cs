@@ -205,7 +205,15 @@ public class PlayerController : Singleton<PlayerController>
             enemy.StartAttack();
         }
 
+        ActionInvencible invulnerableItem = collision.gameObject.GetComponent<ActionInvencible>();
+        if (invulnerableItem != null)
+            {
+                invulnerableItem.PerformAction();
+            }
+     
+
     }
+
 
     public void RespawnPlayer()
     {
