@@ -36,6 +36,7 @@ public class PlayerController : Singleton<PlayerController>
     private float invulnerabilityTimer = 0f;
     private float vSpeed = 0f;
     public PlayerStateMachine _playerStateMachine;
+    private float targetScale;
 
     private void OnValidate()
     {
@@ -49,6 +50,11 @@ public class PlayerController : Singleton<PlayerController>
 
         healthBase.OnDamage += Damage;
         healthBase.OnKill += OnKill;
+    }
+
+    public void SetTargetScale(float targetScale)
+    {
+        this.targetScale = targetScale;
     }
 
     private void Start()
@@ -112,6 +118,14 @@ public class PlayerController : Singleton<PlayerController>
     private void Update()
     {
         _playerStateMachine.Update();
+        if (isInvulnerable)
+        {
+            invulnerabilityTimer -= Time.deltaTime;
+            if (invulnerabilityTimer <= 0f)
+            {
+                isInvulnerable = false;
+            }
+        }
 
 
         transform.Rotate(0, Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime, 0); 
@@ -150,6 +164,7 @@ public class PlayerController : Singleton<PlayerController>
 
         if (isWalking && (Mathf.Abs(inputAxisVertical) > 0 || Mathf.Abs(inputAxisHorizontal) > 0))
         {
+     
             
             float diagonalFactor = Mathf.Sqrt(0.5f);
 
@@ -178,14 +193,6 @@ public class PlayerController : Singleton<PlayerController>
         myAnimator.SetBool("Run", isWalking);  
         myAnimator.SetBool("Jump", _isJumping);
 
-        if (isInvulnerable)
-        {
-            invulnerabilityTimer -= Time.deltaTime;
-            if (invulnerabilityTimer <= 0f)
-            {
-                isInvulnerable = false;
-            }
-        }
 
     }
 
@@ -227,6 +234,7 @@ public class PlayerController : Singleton<PlayerController>
 
     public void SetInvencible(float duration)
     {
+        Debug.Log("SetInvencible");
         isInvulnerable = true;
         invulnerabilityTimer = duration;
     }

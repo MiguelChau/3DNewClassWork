@@ -5456,8 +5456,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
   m_PivotOffset: {x: 0, y: 0, z: 0}
-  m_AmplitudeGain: 1
-  m_FrequencyGain: 1
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 0
   mNoiseOffsets: {x: -146.53146, y: 242.1943, z: -769.8589}
 --- !u!4 &468012620 stripped
 Transform:
@@ -8504,7 +8504,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 733142711}
-  m_LocalRotation: {x: -0.018309273, y: 0.97780377, z: -0.18490565, w: -0.09682168}
+  m_LocalRotation: {x: -0.018309267, y: 0.97780377, z: -0.18490568, w: -0.09682164}
   m_LocalPosition: {x: 150.25385, y: 7.613741, z: 109.73155}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -13144,7 +13144,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1062203735}
-  m_LocalRotation: {x: -0.056893874, y: 0.87834173, z: -0.46215478, w: -0.10812884}
+  m_LocalRotation: {x: -0.05689387, y: 0.8783418, z: -0.46215475, w: -0.108128846}
   m_LocalPosition: {x: 150.25385, y: 11.613741, z: 108.73155}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -14186,7 +14186,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1125402705}
-  m_LocalRotation: {x: -0.018309267, y: 0.97780377, z: -0.18490566, w: -0.09682165}
+  m_LocalRotation: {x: -0.018309273, y: 0.97780377, z: -0.18490565, w: -0.09682168}
   m_LocalPosition: {x: 1, y: 3.233, z: 23.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -24601,7 +24601,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1952163538}
-  m_LocalRotation: {x: -0.018309267, y: 0.97780377, z: -0.18490566, w: -0.09682165}
+  m_LocalRotation: {x: -0.018309273, y: 0.97780377, z: -0.18490565, w: -0.09682168}
   m_LocalPosition: {x: 150.25385, y: 7.613741, z: 109.73155}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -26032,6 +26032,8 @@ MonoBehaviour:
   keyCode: 114
   sOInt: {fileID: 0}
   invencibleDuration: 5
+  invencibleScale: 2
+  easeInvencbile: 27
 --- !u!1001 &2049150593
 PrefabInstance:
   m_ObjectHideFlags: 0
