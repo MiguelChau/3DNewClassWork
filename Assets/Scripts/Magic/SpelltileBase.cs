@@ -19,13 +19,13 @@ public class SpelltileBase : MonoBehaviour
     }
     private void Update()
     {
-        //transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        
         transform.position += (direction != null ? direction.Value : transform.forward) * speed * Time.deltaTime;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        //Debug.Log("hit)");
+        
         if (collision.gameObject != this.gameObject)
         {
             foreach (var t in tagsToHit)
@@ -34,13 +34,18 @@ public class SpelltileBase : MonoBehaviour
                 if (collision.transform.CompareTag(t))
                 {
                     var damageable = collision.transform.GetComponent<IDamageable>();
+                    var playerController = collision.transform.GetComponent<PlayerController>();
 
-                    if (damageable != null)
+                    if (damageable != null && playerController != null)
                     {
+                        if (!playerController.isInvulnerable)
+                        {
+                            playerController.SetInvencible(playerController.invulnerabilityTimer);
+                            damageable.Damage(damageAmount);
 
-                        damageable.Damage(damageAmount);
-
+                        }
                     }
+                    
 
                     break;
                 }

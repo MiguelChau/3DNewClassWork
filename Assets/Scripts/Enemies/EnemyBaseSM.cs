@@ -175,8 +175,15 @@ namespace Enemy
 
             if (p != null)
             {
-                p.healthBase.Damage(1);
+                if (!p.isInvulnerable)
+                {
+                    {
+                        p.SetInvencible(p.invulnerabilityTimer);
+                        p.healthBase.Damage(0);
+                    }
+                }
             }
+           
         }
 
         public virtual void Update()

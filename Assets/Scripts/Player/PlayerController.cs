@@ -31,9 +31,9 @@ public class PlayerController : Singleton<PlayerController>
     public float jumpSpeed = 15f;
     private bool _isJumping = false;
 
-    private bool isInvulnerable = false;
-    private float invulnerabilityDuration = 5f;
-    private float invulnerabilityTimer = 0f;
+    public bool isInvulnerable = false;
+    //protected float invulnerabilityDuration = 5f;
+    public float invulnerabilityTimer = 0f;
     private float vSpeed = 0f;
     public PlayerStateMachine _playerStateMachine;
     private float targetScale;
@@ -212,13 +212,6 @@ public class PlayerController : Singleton<PlayerController>
             enemy.StartAttack();
         }
 
-        ActionInvencible invulnerableItem = collision.gameObject.GetComponent<ActionInvencible>();
-        if (invulnerableItem != null)
-            {
-                invulnerableItem.PerformAction();
-            }
-     
-
     }
 
 
@@ -231,7 +224,6 @@ public class PlayerController : Singleton<PlayerController>
             characterController.enabled = true;
         }
     }
-
     public void SetInvencible(float duration)
     {
         Debug.Log("SetInvencible");
