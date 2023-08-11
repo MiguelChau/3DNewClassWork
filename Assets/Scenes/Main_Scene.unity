@@ -13144,7 +13144,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1062203735}
-  m_LocalRotation: {x: -0.05689387, y: 0.8783418, z: -0.46215475, w: -0.108128846}
+  m_LocalRotation: {x: -0.056893848, y: 0.8783418, z: -0.46215475, w: -0.10812881}
   m_LocalPosition: {x: 150.25385, y: 11.613741, z: 108.73155}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -17563,7 +17563,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae405a83e6fe564fb0540b887fbf9e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerColliders: []
+  playerColliders:
+  - {fileID: 1373078514}
+  - {fileID: 1373078517}
   myAnimator: {fileID: 1617238991}
   characterController: {fileID: 1373078514}
   healthBase: {fileID: 1373078518}
@@ -17575,6 +17577,8 @@ MonoBehaviour:
   keyRun: 122
   speedRun: 2
   jumpSpeed: 15
+  isInvulnerable: 0
+  invulnerabilityTimer: 5
   _playerStateMachine:
     timetoStartGame: 1
 --- !u!114 &1373078516
