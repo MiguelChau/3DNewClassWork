@@ -175,13 +175,9 @@ namespace Enemy
 
             if (p != null)
             {
-                if (!p.isInvulnerable)
-                {
-                    {
-                        p.SetInvencible(p.invulnerabilityTimer);
-                        p.healthBase.Damage(0);
-                    }
-                }
+                                
+              p.healthBase.Damage(1);
+                
             }
            
         }

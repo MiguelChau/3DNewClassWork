@@ -9,6 +9,7 @@ public class MagicFireAOE : MagicFireBasic
 
     public void CastAOE(Transform target = null)
     {
+        Debug.Log("AOESHOOT");
         int mult = 0; 
 
         for (int i = 0; i < amountPerCast; i++)
