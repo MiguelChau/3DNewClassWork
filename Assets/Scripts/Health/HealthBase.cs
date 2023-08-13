@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Core.Singleton;
 
-public class HealthBase : Singleton<HealthBase>, IDamageable
+public class HealthBase : MonoBehaviour, IDamageable
 {
     public float startLife = 10f;
     public bool destroyOnKill = false;
@@ -16,10 +15,10 @@ public class HealthBase : Singleton<HealthBase>, IDamageable
 
 
     private bool isInvulnerable = false;
-    private float invulnerableTime = .5f;
+    private float invulnerableTime = 5f;
     private float invulnerableTimeStart;
 
-    protected override void Awake()
+    protected void Awake()
     {
         Init();
     }
@@ -33,6 +32,12 @@ public class HealthBase : Singleton<HealthBase>, IDamageable
     {
         _currentLife = startLife;
         UpdateUI();
+    }
+
+    public void SetInvulnerable()
+    {
+        isInvulnerable = true;
+        invulnerableTimeStart = Time.time;
     }
 
     protected virtual void Kill()
@@ -56,12 +61,6 @@ public class HealthBase : Singleton<HealthBase>, IDamageable
         }
         UpdateUI();
         OnDamage?.Invoke(this);
-
-        if(invulnerableTime > 0)
-        {
-            isInvulnerable = true;
-            invulnerableTimeStart = Time.time;
-        }
     }
 
     private void Update()

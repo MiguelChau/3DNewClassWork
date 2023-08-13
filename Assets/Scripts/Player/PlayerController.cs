@@ -54,6 +54,11 @@ public class PlayerController : Singleton<PlayerController>
         this.targetScale = targetScale;
     }
 
+    public void SetInvulnerable()
+    {
+        healthBase.SetInvulnerable();
+    }
+
     private void Start()
     {
         _playerStateMachine = new PlayerStateMachine(myAnimator);
