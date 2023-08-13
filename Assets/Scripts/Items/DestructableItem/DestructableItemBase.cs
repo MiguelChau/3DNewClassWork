@@ -27,7 +27,7 @@ public class DestructableItemBase : MonoBehaviour
 
     private void OnDamage(HealthBase h)
     {
-        transform.DOShakeScale(shakeDuration, Vector3.up/2, shakeForce); //aquele vector.up/2 vai dividir o valor do para cima e para baixo
+        transform.DOShakeScale(shakeDuration, Vector3.up/2, shakeForce); 
         DropGroupCoins();
     }
 

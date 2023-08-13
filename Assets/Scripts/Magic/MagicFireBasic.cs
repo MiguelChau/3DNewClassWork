@@ -16,7 +16,7 @@ public class MagicFireBasic : MagicBase
 
     private void Awake()
     {
-        //GetAllUIs();
+        
     }
 
     protected override IEnumerator CastCoroutine()
@@ -73,10 +73,6 @@ public class MagicFireBasic : MagicBase
         }
     }
 
-    /*private void GetAllUIs()
-    {
-        uIUpdaters = GameObject.FindObjectsOfType<UIFillUpdater>().ToList();
-    }*/
 
     public void SetShouldUpdateUI(bool value)
     {

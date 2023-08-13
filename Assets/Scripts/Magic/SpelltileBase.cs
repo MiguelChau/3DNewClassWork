@@ -18,8 +18,7 @@ public class SpelltileBase : MonoBehaviour
         Destroy(gameObject, timeToExpire);
     }
     private void Update()
-    {
-        
+    {        
         transform.position += (direction != null ? direction.Value : transform.forward) * speed * Time.deltaTime;
     }
 
@@ -33,20 +32,13 @@ public class SpelltileBase : MonoBehaviour
         
                 if (collision.transform.CompareTag(t))
                 {
-                    var damageable = collision.transform.GetComponent<IDamageable>();
-                    var playerController = collision.transform.GetComponent<PlayerController>();
+                    var damageable = collision.transform.GetComponent<IDamageable>();                    
 
-                    if (damageable != null && playerController != null)
+                    if (damageable != null)
                     {
-                        if (!playerController.isInvulnerable)
-                        {
-                            playerController.SetInvencible(playerController.invulnerabilityTimer);
-                            damageable.Damage(damageAmount);
-
-                        }
+                        damageable.Damage(damageAmount);
                     }
                     
-
                     break;
                 }
             }

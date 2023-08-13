@@ -31,9 +31,6 @@ public class PlayerController : Singleton<PlayerController>
     public float jumpSpeed = 15f;
     private bool _isJumping = false;
 
-    public bool isInvulnerable = false;
-    //protected float invulnerabilityDuration = 5f;
-    public float invulnerabilityTimer = 0f;
     private float vSpeed = 0f;
     public PlayerStateMachine _playerStateMachine;
     private float targetScale;
@@ -91,11 +88,6 @@ public class PlayerController : Singleton<PlayerController>
         }
 
         ShakeCameraOnDamage.Instance.ShakeCam();
-
-        if (isInvulnerable)
-        {
-            return; 
-        }
     }
 
     private void RevivePlayer()
@@ -118,15 +110,6 @@ public class PlayerController : Singleton<PlayerController>
     private void Update()
     {
         _playerStateMachine.Update();
-        if (isInvulnerable)
-        {
-            invulnerabilityTimer -= Time.deltaTime;
-            if (invulnerabilityTimer <= 0f)
-            {
-                isInvulnerable = false;
-            }
-        }
-
 
         transform.Rotate(0, Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime, 0); 
 
@@ -223,11 +206,5 @@ public class PlayerController : Singleton<PlayerController>
             transform.position = CheckPointManager.Instance.GetPositionFromLastCheckPoint();
             characterController.enabled = true;
         }
-    }
-    public void SetInvencible(float duration)
-    {
-        Debug.Log("SetInvencible");
-        isInvulnerable = true;
-        invulnerabilityTimer = duration;
     }
 }

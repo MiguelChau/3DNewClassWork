@@ -13,6 +13,7 @@ public class PlayerAbilityCast : PlayerAbilityBase
     private int currentMagicIndex;
 
     private MagicBase[] _magicInstances;
+    private MagicFireAOE magicFireAOE;
 
     protected override void Init()
     {
@@ -31,7 +32,7 @@ public class PlayerAbilityCast : PlayerAbilityBase
         inputs.GamePlay.Cast2.performed += ctx =>
         {
             SwitchSpell(1);
-            StartCast();
+            StartAoeCast();
         };
         inputs.GamePlay.Cast2.canceled += ctx => StopCast();
     }
@@ -45,10 +46,15 @@ public class PlayerAbilityCast : PlayerAbilityBase
             _magicInstances[i] = Instantiate(magicBase[i], castPosition);
             _magicInstances[i].gameObject.SetActive(false);
             _magicInstances[i].transform.localPosition = _magicInstances[i].transform.localEulerAngles = Vector3.zero;
+            if(_magicInstances[i] is MagicFireAOE)
+            {
+                magicFireAOE = (MagicFireAOE)_magicInstances[i];
+            }
         }
         _currentMagic = _magicInstances[0];
         _currentMagic.gameObject.SetActive(true);
         currentMagicIndex = 0;
+
     }
 
     private void StartCast()
@@ -61,6 +67,14 @@ public class PlayerAbilityCast : PlayerAbilityBase
     {
         Debug.Log("Fire");
         _currentMagic.StopCast();
+    }
+
+    private void StartAoeCast()
+    {
+        if (magicFireAOE != null)
+        {
+            magicFireAOE.CastAOE();
+        }
     }
 
     private void SwitchSpell(int newIndex)

@@ -26,7 +26,7 @@ public class ActionInvencible : ActionBase
             isInvulnerable = true;
             ScalePlayer(invencibleScale);
             ItemManager.Instance.RemoveByType(ItemType.INVENCIBLE);
-            PlayerController.Instance.SetInvencible(invencibleDuration);
+            HealthBase.Instance.Damage(invencibleDuration);
 
             StartCoroutine(ReturnToNormalSizeAfterDelay());
         }
