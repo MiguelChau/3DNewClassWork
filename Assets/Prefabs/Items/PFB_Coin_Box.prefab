@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2453182538852772802}
   - component: {fileID: 6705407032285186321}
   - component: {fileID: 6705407032285186320}
-  - component: {fileID: 8398647257983335927}
+  - component: {fileID: 1608902275544813302}
   m_Layer: 0
   m_Name: PFB_Coin_Box
   m_TagString: Untagged
@@ -53,7 +53,9 @@ MonoBehaviour:
   compareTag: Player
   graphicItem: {fileID: 8369348835785730797}
   timeToHide: 2
-  itemCollider: {fileID: 2453182538852772802}
+  itemColliders:
+  - {fileID: 2453182538852772802}
+  - {fileID: 6705407032285186320}
   audioSource: {fileID: 0}
   itemParticleSystem: {fileID: 0}
 --- !u!135 &2453182538852772802
@@ -98,7 +100,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.6
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8398647257983335927
+--- !u!114 &1608902275544813302
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

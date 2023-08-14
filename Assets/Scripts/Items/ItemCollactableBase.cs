@@ -13,7 +13,7 @@ namespace Items
         public float timeToHide = 2;
 
         [Header("Collider")]
-        public Collider itemCollider;
+        public Collider[] itemColliders;
 
         [Header("Sounds")]
         public AudioSource audioSource;
@@ -21,6 +21,10 @@ namespace Items
         [Header("VFX")]
         public ParticleSystem itemParticleSystem;
 
+        private void OnValidate()
+        {
+            itemColliders = GetComponents<Collider>();
+        }
         private void OnTriggerEnter(Collider collision)
         {
             if (collision.transform.CompareTag(compareTag))
@@ -30,7 +34,13 @@ namespace Items
         }
         protected virtual void Collect()
         {
-            if (itemCollider != null) itemCollider.enabled = false;
+            if (itemColliders != null)
+            {
+                for(int i = 0; i < itemColliders.Length; ++i)
+                {
+                    itemColliders[i].enabled = false;
+                }
+            }
             if (graphicItem != null) graphicItem.SetActive(false);
             Invoke("HideObject", timeToHide);
             OnCollect();
