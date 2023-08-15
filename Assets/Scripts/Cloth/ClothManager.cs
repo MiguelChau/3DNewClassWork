@@ -1,4 +1,4 @@
- using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Core.Singleton;
@@ -8,7 +8,8 @@ namespace Cloth
     public enum ClothType
     {
         SPEED,
-        STRONG
+        STRONG,
+        IMMOLATION_AURA
     }
     public class ClothManager : Singleton<ClothManager>
     {

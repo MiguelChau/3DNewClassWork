@@ -15,14 +15,13 @@ public class PlayerController : Singleton<PlayerController>
     [Header("Life")]
     public HealthBase healthBase;
     private bool _alive = true;
-
-    public float speed = 1f;
-    public float turnSpeed = 1f; 
-    public float gravity = -9.8f;
-
+    
     [Header("Keys Moviment")]
     public KeyCode diagonalLeft = KeyCode.Q;
     public KeyCode diagonalRight = KeyCode.E;
+    public float speed = 1f;
+    public float turnSpeed = 1f;
+    public float gravity = -9.8f;
 
     [Header("Run Setup")]
     public KeyCode keyRun = KeyCode.Z;
@@ -31,6 +30,9 @@ public class PlayerController : Singleton<PlayerController>
     [Header("Jump Setup")]
     public float jumpSpeed = 15f;
     private bool _isJumping = false;
+
+    [Header("VFX")]
+    public ParticleSystem immolationAuraVFX;
 
     [Space]
     [SerializeField] private ClothChange _clothChange;
@@ -68,6 +70,7 @@ public class PlayerController : Singleton<PlayerController>
         _playerStateMachine = new PlayerStateMachine(myAnimator);
         _playerStateMachine.Init();
 
+        immolationAuraVFX = GetComponentInChildren<ParticleSystem>();
     }
 
    
@@ -241,4 +244,68 @@ public class PlayerController : Singleton<PlayerController>
         yield return new WaitForSeconds(duration);
         _clothChange.ResetTexture();
     }
+
+    public void ActivateImmolationAura(float duration, float damagePerSecond)
+    {
+        StartCoroutine(ActivateImmolationAuraCoroutine(duration, damagePerSecond));
+    }
+
+    private IEnumerator ActivateImmolationAuraCoroutine(float duration, float damagePerSecond)
+    {
+        var immolationSetup = ClothManager.Instance.GetSetuByType(ClothType.IMMOLATION_AURA);
+        _clothChange.ChangeTexture(immolationSetup);
+
+        ParticleSystem fireParticles = GetComponentInChildren<ParticleSystem>();
+        if (immolationAuraVFX != null)
+        {
+            immolationAuraVFX.Play();
+        }
+
+
+        float elapsedTime = 0f;
+        while (elapsedTime < duration)
+        {
+            
+            ApplyDamageToNearbyEnemies(damagePerSecond * Time.deltaTime);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+
+
+        if (immolationAuraVFX != null)
+        {
+            immolationAuraVFX.Stop();
+        }
+        _clothChange.ResetTexture();
+    }
+
+    private void ApplyDamageToNearbyEnemies(float damagePerSecond)
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 5f);
+
+        foreach (Collider collider in colliders)
+        {
+            Debug.Log("Damage immoaura ");
+            EnemyBaseSM enemy = collider.GetComponent<EnemyBaseSM>();
+            if (enemy != null)
+            {
+                enemy.healthBase.Damage(damagePerSecond * Time.deltaTime);
+            }
+            
+            BossBase boss = collider.GetComponent<BossBase>();
+            if (boss != null)
+            {
+                boss.healthBase.Damage(damagePerSecond * Time.deltaTime);
+            }
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, 5f); 
+    }
+
 }
