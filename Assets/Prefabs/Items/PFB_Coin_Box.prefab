@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dist: 0.2
-  coinSpeed: 3
+  coinSpeed: 2
 --- !u!1 &8369348835785730797
 GameObject:
   m_ObjectHideFlags: 0

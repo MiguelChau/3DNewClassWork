@@ -4,6 +4,7 @@ using UnityEngine;
 using Boss;
 using Enemy;
 using Core.Singleton;
+using Cloth;
 
 public class PlayerController : Singleton<PlayerController>
 {
@@ -30,6 +31,9 @@ public class PlayerController : Singleton<PlayerController>
     [Header("Jump Setup")]
     public float jumpSpeed = 15f;
     private bool _isJumping = false;
+
+    [Space]
+    [SerializeField] private ClothChange _clothChange;
 
     private float vSpeed = 0f;
     public PlayerStateMachine _playerStateMachine;
@@ -211,5 +215,30 @@ public class PlayerController : Singleton<PlayerController>
             transform.position = CheckPointManager.Instance.GetPositionFromLastCheckPoint();
             characterController.enabled = true;
         }
+    }
+
+    public void ChangeSpeed(float speed, float duration)
+    {
+        StartCoroutine(ChangeSpeedCoroutine(speed, duration));
+    }
+
+    IEnumerator ChangeSpeedCoroutine(float localSpeed, float duration)
+    {
+        var defaultSpeed = speed;
+        speed = localSpeed;
+        yield return new WaitForSeconds(duration);
+        speed = defaultSpeed;
+    }
+
+    public void ChangeTexture(ClothSetup setup, float duration)
+    {
+        StartCoroutine(ChangeTextureCoroutine(setup, duration));
+    }
+
+    IEnumerator ChangeTextureCoroutine(ClothSetup setup, float duration)
+    {
+        _clothChange.ChangeTexture(setup);
+        yield return new WaitForSeconds(duration);
+        _clothChange.ResetTexture();
     }
 }
