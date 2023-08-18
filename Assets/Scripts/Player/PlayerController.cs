@@ -255,7 +255,7 @@ public class PlayerController : Singleton<PlayerController>
         var immolationSetup = ClothManager.Instance.GetSetuByType(ClothType.IMMOLATION_AURA);
         _clothChange.ChangeTexture(immolationSetup);
 
-        ParticleSystem fireParticles = GetComponentInChildren<ParticleSystem>();
+        
         if (immolationAuraVFX != null)
         {
             immolationAuraVFX.Play();
@@ -291,13 +291,13 @@ public class PlayerController : Singleton<PlayerController>
             EnemyBaseSM enemy = collider.GetComponent<EnemyBaseSM>();
             if (enemy != null)
             {
-                enemy.healthBase.Damage(damagePerSecond * Time.deltaTime);
+                enemy.healthBase.Damage(damagePerSecond);
             }
             
             BossBase boss = collider.GetComponent<BossBase>();
             if (boss != null)
             {
-                boss.healthBase.Damage(damagePerSecond * Time.deltaTime);
+                boss.healthBase.Damage(damagePerSecond);
             }
         }
     }

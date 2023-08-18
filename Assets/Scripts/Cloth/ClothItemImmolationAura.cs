@@ -12,7 +12,7 @@ namespace Cloth
         {
             base.Collect();
 
-            PlayerController.Instance.ActivateImmolationAura(damagePerSecond, duration);
+            PlayerController.Instance.ActivateImmolationAura(duration, damagePerSecond);
         }
     }
 }
