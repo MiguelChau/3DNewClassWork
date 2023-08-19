@@ -54,6 +54,9 @@ namespace Boss
         public float timeBetweenCast = .3f;
         public float speed = 50f;
 
+        [Header("VFX & Audio")]
+        public ParticleSystem bossDeathParticleSystem;
+
         public float bossSpeed = 5f;
         public List<Transform> waypoints;
 
@@ -155,6 +158,10 @@ namespace Boss
         #region HEALTH
         private void OnEnemyKill(HealthBase h)
         {
+            if(bossDeathParticleSystem != null)
+            {
+                bossDeathParticleSystem.Play();
+            }
             SwitchState(BossAction.DEATH);
         }
         #endregion

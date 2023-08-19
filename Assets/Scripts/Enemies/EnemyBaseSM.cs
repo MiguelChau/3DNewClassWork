@@ -27,6 +27,8 @@ namespace Enemy
             Melee
         }
 
+        public ParticleSystem enemyDeathParticleSystem;
+        public ParticleSystem enemyDamageParticleSystem;
         public Collider enemyCollider;
         public bool lookAtPlayer = false;
         protected bool _playerDetected = false;
@@ -139,6 +141,10 @@ namespace Enemy
         #region HEALTH
         private void OnEnemyKill(HealthBase h)
         {
+            if (enemyDeathParticleSystem != null)
+            {
+                enemyDeathParticleSystem.Play();
+            }
             SwitchState(EnemyAction.DEATH);
         }
         #endregion

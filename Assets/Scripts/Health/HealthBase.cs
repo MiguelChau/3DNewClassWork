@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
+using Enemy;
 
 public class HealthBase : MonoBehaviour, IDamageable
 {
@@ -15,7 +16,7 @@ public class HealthBase : MonoBehaviour, IDamageable
     public float damageMultiply = 1f;
 
     public List<UIFillUpdater> uiFillUpdater;
-
+    
 
     private bool isInvulnerable = false;
     private float invulnerableTime = 5f;
@@ -46,7 +47,7 @@ public class HealthBase : MonoBehaviour, IDamageable
     protected virtual void Kill()
     {
         if (destroyOnKill)
-            Destroy(gameObject, 3f);
+            Destroy(gameObject, 1f);
 
         OnKill?.Invoke(this);
     }
@@ -64,6 +65,14 @@ public class HealthBase : MonoBehaviour, IDamageable
         }
         UpdateUI();
         OnDamage?.Invoke(this);
+
+
+        EnemyBaseSM enemyBase = GetComponent<EnemyBaseSM>();
+
+        if (enemyBase != null && enemyBase.enemyDamageParticleSystem != null)
+        {
+            enemyBase.enemyDamageParticleSystem.Play();
+        }
     }
 
     public void ChangeDamageMultiply(float damage, float duration)

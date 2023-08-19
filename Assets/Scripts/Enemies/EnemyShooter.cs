@@ -16,6 +16,7 @@ namespace Enemy
             
         }
 
+        [NaughtyAttributes.Button]
         public override void StartShoot(Action endCallback = null)
         {
             StartCoroutine(ShootCoroutine(endCallback));
