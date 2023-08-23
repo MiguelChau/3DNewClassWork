@@ -13,21 +13,25 @@ public class CheckPointManager : Singleton<CheckPointManager>
 
     public TextMeshProUGUI checkpointText;
     public float checkpointTextDuration = 2f;
+    private int _savedCheckPointKey = 0;
 
     private void Start()
     {
         checkpointText.gameObject.SetActive(false);
     }
+
     public bool HasCheckPoint()
     {
         return lastCheckPointKey > 0;
     }
     public void SaveCheckPoint(int i)
     {
-        if(i > lastCheckPointKey)
+        if (i > _savedCheckPointKey)
         {
-            lastCheckPointKey = i;
+            _savedCheckPointKey = i;
+            SaveManager.Instance.SaveLastCheckPoint(_savedCheckPointKey);
             ShowCheckpointText();
+            SaveManager.Instance.ShowSavescreen();
         }
     }
 

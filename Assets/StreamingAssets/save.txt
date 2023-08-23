@@ -1,0 +1,6 @@
+{
+    "lastLevel": 1,
+    "coins": 10.0,
+    "health": 0.0,
+    "playerName": "Diana"
+}

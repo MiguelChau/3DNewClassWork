@@ -11,12 +11,27 @@ public class CheckPointBase : MonoBehaviour
 
     private bool checkPointActived = false;
     private string checkPointKey = "CheckPointKey";
+    private bool waitingForSaveConfirmation = false;
 
     private void Start()
     {
         checkPointManager = CheckPointManager.Instance;
     }
 
+    private void Update()
+    {
+        if (waitingForSaveConfirmation)
+        {
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                ConfirmSave();
+            }
+            else if (Input.GetKeyDown(KeyCode.N))
+            {
+                CancelSaveConfirmation();
+            }
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (!checkPointActived && other.transform.tag == "Player")
@@ -29,6 +44,8 @@ public class CheckPointBase : MonoBehaviour
     {
         TurnItOn();
         SaveCheckPoint();
+
+        SaveManager.Instance.ShowSavescreen();
     }
 
     [NaughtyAttributes.Button]
@@ -49,5 +66,33 @@ public class CheckPointBase : MonoBehaviour
         checkPointActived = true;
 
         checkPointManager.ShowCheckpointText();
+
+        StartCoroutine(WaitForSaveConfirmation());
+    }
+
+    private IEnumerator WaitForSaveConfirmation()
+    {
+        waitingForSaveConfirmation = true;
+        yield return new WaitForSeconds(2f); 
+
+        if (waitingForSaveConfirmation)
+        {
+            waitingForSaveConfirmation = false;
+            SaveManager.Instance.SaveItems(); 
+        }
+
+        SaveManager.Instance.HideSavescreen(); 
+    }
+
+    public void ConfirmSave()
+    {
+        SaveManager.Instance.SaveItems();
+        SaveManager.Instance.HideSavescreen();
+    }
+
+    public void CancelSaveConfirmation()
+    {
+        waitingForSaveConfirmation = false;
+        SaveManager.Instance.HideSavescreen(); 
     }
 }
