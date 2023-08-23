@@ -29,7 +29,8 @@ public class CheckPointManager : Singleton<CheckPointManager>
         if (i > _savedCheckPointKey)
         {
             _savedCheckPointKey = i;
-            SaveManager.Instance.SaveLastCheckPoint(_savedCheckPointKey);
+            Vector3 checkpointPosition = GetPositionFromLastCheckPoint();
+            SaveManager.Instance.SaveLastCheckPoint(_savedCheckPointKey, checkpointPosition);
             ShowCheckpointText();
             SaveManager.Instance.ShowSavescreen();
         }

@@ -28,9 +28,10 @@ public class SaveManager : Singleton<SaveManager>
         DontDestroyOnLoad(gameObject);
     }
 
-    public void SaveLastCheckPoint(int checkPointKey)
+    public void SaveLastCheckPoint(int checkPointKey, Vector3 checkpointPosition)
     {
         _savedCheckPointKey = checkPointKey;
+        _saveSetup.lastCheckpointPosition = checkpointPosition;
         Save();
     }
 
@@ -134,4 +135,5 @@ public class SaveSetup
     public float health;
     
     public string playerName;
+    public Vector3 lastCheckpointPosition;
 }

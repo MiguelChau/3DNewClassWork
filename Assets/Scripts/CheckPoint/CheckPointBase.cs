@@ -22,7 +22,7 @@ public class CheckPointBase : MonoBehaviour
     {
         if (waitingForSaveConfirmation)
         {
-            if (Input.GetKeyDown(KeyCode.S))
+            if (Input.GetKeyDown(KeyCode.M))
             {
                 ConfirmSave();
             }
@@ -67,10 +67,12 @@ public class CheckPointBase : MonoBehaviour
 
         checkPointManager.ShowCheckpointText();
 
-        StartCoroutine(WaitForSaveConfirmation());
+        Vector3 checkpointPosition = transform.position;
+
+        StartCoroutine(WaitForSaveConfirmation(checkpointPosition));
     }
 
-    private IEnumerator WaitForSaveConfirmation()
+    private IEnumerator WaitForSaveConfirmation(Vector3 checkpointPosition)
     {
         waitingForSaveConfirmation = true;
         yield return new WaitForSeconds(2f); 
@@ -78,7 +80,9 @@ public class CheckPointBase : MonoBehaviour
         if (waitingForSaveConfirmation)
         {
             waitingForSaveConfirmation = false;
-            SaveManager.Instance.SaveItems(); 
+            SaveManager.Instance.SaveItems();
+
+            SaveManager.Instance.SaveLastCheckPoint(key, checkpointPosition);
         }
 
         SaveManager.Instance.HideSavescreen(); 
