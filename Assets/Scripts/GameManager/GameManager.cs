@@ -12,8 +12,8 @@ public class GameManager : Singleton<GameManager>
         GAMEPLAY,
         PAUSE,
         WIN,
-        LOSE,
-        SAVE
+        LOSE
+        
     }
 
     public StateMachine<GameStates> stateMachine;
@@ -33,18 +33,8 @@ public class GameManager : Singleton<GameManager>
         stateMachine.RegisterStates(GameStates.PAUSE, new StateBase());
         stateMachine.RegisterStates(GameStates.WIN, new StateBase()); 
         stateMachine.RegisterStates(GameStates.LOSE, new StateBase());
-        stateMachine.RegisterStates(GameStates.SAVE, new StateBase());
+        
 
         stateMachine.SwitchState(GameStates.INTRO);
-    }
-
-    public void TransitionToCheckpointState()
-    {
-        stateMachine.SwitchState(GameStates.SAVE);
-    }
-
-    public void TransitionToGameplayState()
-    {
-        stateMachine.SwitchState(GameStates.GAMEPLAY);
     }
 }

@@ -11,27 +11,12 @@ public class CheckPointBase : MonoBehaviour
 
     private bool checkPointActived = false;
     private string checkPointKey = "CheckPointKey";
-    private bool waitingForSaveConfirmation = false;
 
     private void Start()
     {
         checkPointManager = CheckPointManager.Instance;
     }
 
-    private void Update()
-    {
-        if (waitingForSaveConfirmation)
-        {
-            if (Input.GetKeyDown(KeyCode.M))
-            {
-                ConfirmSave();
-            }
-            else if (Input.GetKeyDown(KeyCode.N))
-            {
-                CancelSaveConfirmation();
-            }
-        }
-    }
     private void OnTriggerEnter(Collider other)
     {
         if (!checkPointActived && other.transform.tag == "Player")
@@ -44,8 +29,6 @@ public class CheckPointBase : MonoBehaviour
     {
         TurnItOn();
         SaveCheckPoint();
-
-        SaveManager.Instance.ShowSavescreen();
     }
 
     [NaughtyAttributes.Button]
@@ -53,7 +36,7 @@ public class CheckPointBase : MonoBehaviour
     {
         meshRenderer.material.SetColor("_EmissionColor", Color.yellow);
     }
-    
+
     private void TurnItOff()
     {
         meshRenderer.material.SetColor("_EmissionColor", Color.blue);
@@ -67,36 +50,19 @@ public class CheckPointBase : MonoBehaviour
 
         checkPointManager.ShowCheckpointText();
 
-        Vector3 checkpointPosition = transform.position;
+        Items.ItemManager itemManager = GetComponent<Items.ItemManager>();
 
-        StartCoroutine(WaitForSaveConfirmation(checkpointPosition));
-    }
+        SaveManager.Instance.Setup.coins = Items.ItemManager.Instance.GetItemByType(Items.ItemType.COIN).sOInt.value;
+        SaveManager.Instance.Setup.health = Items.ItemManager.Instance.GetItemByType(Items.ItemType.HEALTH_POTION).sOInt.value;
 
-    private IEnumerator WaitForSaveConfirmation(Vector3 checkpointPosition)
-    {
-        waitingForSaveConfirmation = true;
-        yield return new WaitForSeconds(2f); 
+        GameObject player = GameObject.FindWithTag("Player");
 
-        if (waitingForSaveConfirmation)
+        if(player !=null)
         {
-            waitingForSaveConfirmation = false;
-            SaveManager.Instance.SaveItems();
-
-            SaveManager.Instance.SaveLastCheckPoint(key, checkpointPosition);
+            Vector3 playerPosition = player.transform.position;
+            SaveManager.Instance.Setup.playerPosition = playerPosition;
         }
-
-        SaveManager.Instance.HideSavescreen(); 
-    }
-
-    public void ConfirmSave()
-    {
-        SaveManager.Instance.SaveItems();
-        SaveManager.Instance.HideSavescreen();
-    }
-
-    public void CancelSaveConfirmation()
-    {
-        waitingForSaveConfirmation = false;
-        SaveManager.Instance.HideSavescreen(); 
+       
+        SaveManager.Instance.Save();
     }
 }

@@ -13,32 +13,27 @@ public class CheckPointManager : Singleton<CheckPointManager>
 
     public TextMeshProUGUI checkpointText;
     public float checkpointTextDuration = 2f;
-    private int _savedCheckPointKey = 0;
 
     private void Start()
     {
         checkpointText.gameObject.SetActive(false);
     }
-
     public bool HasCheckPoint()
     {
         return lastCheckPointKey > 0;
     }
     public void SaveCheckPoint(int i)
     {
-        if (i > _savedCheckPointKey)
+        if (i > lastCheckPointKey)
         {
-            _savedCheckPointKey = i;
-            Vector3 checkpointPosition = GetPositionFromLastCheckPoint();
-            SaveManager.Instance.SaveLastCheckPoint(_savedCheckPointKey, checkpointPosition);
+            lastCheckPointKey = i;
             ShowCheckpointText();
-            SaveManager.Instance.ShowSavescreen();
         }
     }
 
     public Vector3 GetPositionFromLastCheckPoint()
     {
-       var checkPoint = checkPoints.Find(i => i.key == lastCheckPointKey);
+        var checkPoint = checkPoints.Find(i => i.key == lastCheckPointKey);
         return checkPoint.transform.position;
     }
 
@@ -55,3 +50,4 @@ public class CheckPointManager : Singleton<CheckPointManager>
         checkpointText.gameObject.SetActive(false);
     }
 }
+

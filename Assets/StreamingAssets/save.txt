@@ -1,11 +1,11 @@
 {
     "lastLevel": 1,
-    "coins": 0.0,
-    "health": 0.0,
-    "playerName": "Diana",
-    "lastCheckpointPosition": {
-        "x": -27.459999084472658,
-        "y": 0.04999995231628418,
-        "z": -33.41999816894531
-    }
+    "coins": 15.0,
+    "health": 1.0,
+    "playerPosition": {
+        "x": -99.16596984863281,
+        "y": 6.315817832946777,
+        "z": -85.54071807861328
+    },
+    "playerName": "Diana"
 }

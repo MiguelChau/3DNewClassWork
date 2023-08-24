@@ -10,10 +10,8 @@ public class SaveManager : Singleton<SaveManager>
 
     [SerializeField] private SaveSetup _saveSetup;
     private string _path = Application.streamingAssetsPath + "/save.txt";
-    public GameObject saveScreen;
 
     public int lastLevel;
-    private int _savedCheckPointKey = 0;
 
     public Action<SaveSetup> FileLoaded;
 
@@ -28,21 +26,6 @@ public class SaveManager : Singleton<SaveManager>
         DontDestroyOnLoad(gameObject);
     }
 
-    public void SaveLastCheckPoint(int checkPointKey, Vector3 checkpointPosition)
-    {
-        _savedCheckPointKey = checkPointKey;
-        _saveSetup.lastCheckpointPosition = checkpointPosition;
-        Save();
-    }
-
-    public void ShowSavescreen()
-    {
-        saveScreen.SetActive(true);
-    }  
-    public void HideSavescreen()
-    {
-        saveScreen.SetActive(false);
-    }
     private void CreateNewSave()
     {
         _saveSetup = new SaveSetup();
@@ -52,11 +35,11 @@ public class SaveManager : Singleton<SaveManager>
 
     private void Start()
     {
-        Invoke(nameof(Load), .1f); 
+        Invoke(nameof(Load), .1f);
     }
     #region SAVE
     [NaughtyAttributes.Button]
-    private void Save()
+    public void Save()
     {
         string setupToJson = JsonUtility.ToJson(_saveSetup, true);
         Debug.Log(setupToJson);
@@ -82,7 +65,7 @@ public class SaveManager : Singleton<SaveManager>
         Save();
     }
     #endregion
-   
+
     private void SaveFile(string json)
     {
         Debug.Log(_path);
@@ -94,30 +77,24 @@ public class SaveManager : Singleton<SaveManager>
     {
         string fileLoaded = "";
 
-        if (File.Exists(_path)) 
+        if (File.Exists(_path))
         {
             fileLoaded = File.ReadAllText(_path);
             _saveSetup = JsonUtility.FromJson<SaveSetup>(fileLoaded);
 
             lastLevel = _saveSetup.lastLevel;
 
+            if (FileLoaded != null)
+            {
+                FileLoaded.Invoke(_saveSetup);
+            }
+
         }
         else
         {
             CreateNewSave();
             Save();
-        }
-
-        if (FileLoaded != null)
-        {
-            FileLoaded.Invoke(_saveSetup);
-        }
-    }
-
-    public int LoadLastCheckPoint()
-    {
-        Load();
-        return _savedCheckPointKey;
+        }       
     }
 
     [NaughtyAttributes.Button]
@@ -133,7 +110,6 @@ public class SaveSetup
     public int lastLevel;
     public float coins;
     public float health;
-    
+    public Vector3 playerPosition;
     public string playerName;
-    public Vector3 lastCheckpointPosition;
 }
