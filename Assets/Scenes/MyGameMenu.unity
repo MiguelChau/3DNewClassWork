@@ -1397,12 +1397,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 112591954}
     - target: {fileID: 74043178367263641, guid: bafbd58b5a4e82c428983b92e0d3d712, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 74043178367263641, guid: bafbd58b5a4e82c428983b92e0d3d712, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: LoadLevel
       objectReference: {fileID: 0}
     - target: {fileID: 74043178367263641, guid: bafbd58b5a4e82c428983b92e0d3d712, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: LoadSceneHelper, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 74043178367263641, guid: bafbd58b5a4e82c428983b92e0d3d712, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 74043178367263641, guid: bafbd58b5a4e82c428983b92e0d3d712, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 1571535543999797658, guid: bafbd58b5a4e82c428983b92e0d3d712, type: 3}
       propertyPath: m_AnchorMax.y
