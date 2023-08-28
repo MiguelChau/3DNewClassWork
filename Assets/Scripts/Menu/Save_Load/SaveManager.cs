@@ -31,6 +31,7 @@ public class SaveManager : Singleton<SaveManager>
         _saveSetup = new SaveSetup();
         _saveSetup.lastLevel = 0;
         _saveSetup.playerName = "Diana";
+        _saveSetup.playerPositionHasValue = false;
     }
 
     private void Start()
@@ -110,6 +111,7 @@ public class SaveSetup
     public int lastLevel;
     public float coins;
     public float health;
+    public bool playerPositionHasValue;
     public Vector3 playerPosition;
     public string playerName;
 }

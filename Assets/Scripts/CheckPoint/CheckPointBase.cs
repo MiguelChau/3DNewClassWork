@@ -61,6 +61,7 @@ public class CheckPointBase : MonoBehaviour
         {
             Vector3 playerPosition = player.transform.position;
             SaveManager.Instance.Setup.playerPosition = playerPosition;
+            SaveManager.Instance.Setup.playerPositionHasValue = true;
         }
        
         SaveManager.Instance.Save();

@@ -26,8 +26,10 @@ public class MenuButtons : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     }
     public void OnClick()
     {
-        buttonsparticleSystem.Play();
-        
+        if( buttonsparticleSystem != null)
+        {
+            buttonsparticleSystem.Play();
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)

@@ -51,8 +51,20 @@ public class PlayerController : Singleton<PlayerController>
         base.Awake();
         OnValidate();
 
+        CheckLoadedData();
+
         healthBase.OnDamage += Damage;
         healthBase.OnKill += OnKill;
+    }
+
+    private void CheckLoadedData()
+    {
+        var setup = SaveManager.Instance.Setup;
+
+        if(setup != null && setup.playerPositionHasValue)
+        {
+            transform.position = setup.playerPosition;
+        }
     }
 
     public void SetTargetScale(float targetScale)
