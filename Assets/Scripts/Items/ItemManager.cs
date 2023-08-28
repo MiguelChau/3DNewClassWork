@@ -21,6 +21,18 @@ namespace Items
         private void Start()
         {
             Reset();
+            CheckLoadedData();
+
+        }
+
+        private void CheckLoadedData()
+        {
+            var setup = SaveManager.Instance.Setup;
+            if(setup != null)
+            {
+                AddByType(ItemType.COIN, (int)setup.coins);
+                AddByType(ItemType.HEALTH_POTION, (int)setup.health);
+            }
 
         }
         private void Reset()
