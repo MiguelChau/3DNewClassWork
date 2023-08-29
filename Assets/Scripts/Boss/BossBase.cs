@@ -6,6 +6,7 @@ using Chau.StateMachine;
 using DG.Tweening;
 using Animation;
 using UnityEditor;
+using UnityEngine.Events;
 
 namespace Boss
 {
@@ -56,6 +57,10 @@ namespace Boss
 
         [Header("VFX & Audio")]
         public ParticleSystem bossDeathParticleSystem;
+
+        [Header("Events")]
+        public UnityEvent onKillEvent;
+        public EndGame uiEndGame;
 
         public float bossSpeed = 5f;
         public List<Transform> waypoints;
@@ -163,6 +168,10 @@ namespace Boss
                 bossDeathParticleSystem.Play();
             }
             SwitchState(BossAction.DEATH);
+
+            onKillEvent?.Invoke();
+            uiEndGame.CallEndGame();
+            
         }
         #endregion
 
