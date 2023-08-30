@@ -8,6 +8,7 @@ namespace Cloth
     {
         public ClothType clothType; 
         public float duration = 2f;
+        public AudioSource audioSource;
 
         public string compareTag = "Player";
 
@@ -28,6 +29,7 @@ namespace Cloth
         public virtual void Collect() 
         {
             HideObject();
+            if (audioSource != null) audioSource.Play();
         }
 
         private void HideObject()

@@ -28,6 +28,8 @@ public class MagicFireAOE : MagicFireBasic
             projectile.direction = target != null ?  (target.position - projectile.transform.position).normalized : null;
             projectile.transform.parent = null;
 
+            if (audioSource != null) audioSource.Play();
+
         }
 
 

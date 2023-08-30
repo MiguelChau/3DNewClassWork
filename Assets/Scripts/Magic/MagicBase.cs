@@ -5,6 +5,7 @@ using UnityEngine;
 public class MagicBase : MonoBehaviour
 {
     public SpelltileBase prefabSpelltile;
+    public AudioSource audioSource;
 
     public Transform positionToCast;
     public float timeBetweenCast = .3f;
@@ -28,6 +29,8 @@ public class MagicBase : MonoBehaviour
         projectile.transform.rotation = positionToCast.rotation;
         projectile.direction = target != null ? (target.position - projectile.transform.position).normalized : null;
         projectile.speed = speed;
+
+        if (audioSource != null) audioSource.Play();
     }
 
     public void StartCast()
