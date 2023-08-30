@@ -8,7 +8,7 @@ using System;
 public class SaveManager : Singleton<SaveManager>
 {
 
-    [SerializeField] private SaveSetup _saveSetup;
+    [NonSerialized] private SaveSetup _saveSetup = null;
     private string _path = Application.streamingAssetsPath + "/save.txt";
 
     public int lastLevel;
@@ -105,7 +105,7 @@ public class SaveManager : Singleton<SaveManager>
     }
 }
 
-[System.Serializable]
+[Serializable]
 public class SaveSetup
 {
     public int lastLevel;
