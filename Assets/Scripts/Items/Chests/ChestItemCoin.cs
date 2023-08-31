@@ -9,6 +9,7 @@ public class ChestItemCoin : ChestItemBase
     public ItemType itemType; 
     public int itemCount = 5;
     public GameObject itemPrefab;
+    public AudioSource audioSource;
 
     private List<GameObject> _items = new List<GameObject>();
 
@@ -50,6 +51,7 @@ public class ChestItemCoin : ChestItemBase
                 i.transform.DOMoveY(2f, tweenEndTime).SetRelative(); 
                 i.transform.DOScale(0, tweenEndTime / 2).SetDelay(tweenEndTime / 2);
                 ItemManager.Instance.AddByType(itemType);
+                audioSource.Play();
             }
             
         }

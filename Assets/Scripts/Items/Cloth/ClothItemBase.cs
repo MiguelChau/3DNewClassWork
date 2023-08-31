@@ -28,8 +28,9 @@ namespace Cloth
 
         public virtual void Collect() 
         {
-            HideObject();
             if (audioSource != null) audioSource.Play();
+
+            HideObject();
         }
 
         private void HideObject()

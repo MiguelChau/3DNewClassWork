@@ -806,7 +806,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textMesh: {fileID: 329731619}
   timeBetweenLetters: 0.1
-  phrase: 
+  phrase: HAVE FUUUUUUUN
 --- !u!82 &1085272512 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 1571535544064421777, guid: bafbd58b5a4e82c428983b92e0d3d712, type: 3}

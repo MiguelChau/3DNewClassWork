@@ -8,6 +8,7 @@ public class ChestBase : MonoBehaviour
     public KeyCode keyCode = KeyCode.O;
     public Animator animator;
     public string triggerOpen = "Open";
+    public AudioSource chestAudioSource;
 
     [Header("Notification")]
     public GameObject notification;
@@ -37,6 +38,7 @@ public class ChestBase : MonoBehaviour
 
         animator.SetTrigger(triggerOpen);
         _chestOpened = true;
+        if (chestAudioSource != null) chestAudioSource.Play();
         HideNotification();
         Invoke(nameof(ShowItem), 1f);
     }
