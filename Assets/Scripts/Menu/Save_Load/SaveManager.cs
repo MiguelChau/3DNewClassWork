@@ -9,7 +9,7 @@ public class SaveManager : Singleton<SaveManager>
 {
 
     [NonSerialized] private SaveSetup _saveSetup = null;
-    private string _path = Application.streamingAssetsPath + "/save.txt";
+    private string _path;
 
     public int lastLevel;
 
@@ -24,6 +24,7 @@ public class SaveManager : Singleton<SaveManager>
     {
         base.Awake();
         DontDestroyOnLoad(gameObject);
+        _path = Path.Combine(Application.persistentDataPath, "/save.txt");
     }
 
     private void CreateNewSave()
