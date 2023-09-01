@@ -9,7 +9,7 @@ public class SaveManager : Singleton<SaveManager>
 {
 
     [NonSerialized] private SaveSetup _saveSetup = null;
-    private string _path;
+    private string _path = Application.streamingAssetsPath + "/save.txt";
 
     public int lastLevel;
 
@@ -24,10 +24,9 @@ public class SaveManager : Singleton<SaveManager>
     {
         base.Awake();
         DontDestroyOnLoad(gameObject);
-        _path = Path.Combine(Application.persistentDataPath, "/save.txt");
     }
 
-    private void CreateNewSave()
+    public void CreateNewSave()
     {
         _saveSetup = new SaveSetup();
         _saveSetup.lastLevel = 0;
@@ -55,6 +54,32 @@ public class SaveManager : Singleton<SaveManager>
         Save();
     }
 
+    public void SaveEnemiesDead()
+    {
+
+        if (_saveSetup.deadEnemies != null)
+        {
+            foreach (var enemyName in _saveSetup.deadEnemies.Keys)
+            {
+                int numberOfTimesKilled = _saveSetup.deadEnemies[enemyName];
+            }
+        }
+        Save();
+
+    }
+
+    public void SavePlayerHealth()
+    {
+        if (_saveSetup.playerHealth > 0)
+        {
+            HealthBase playerHealth = GameObject.FindObjectOfType<HealthBase>(); 
+            if (playerHealth != null)
+            {
+                playerHealth.SavePlayerHealth();
+            }
+        }
+        Save();
+    }
     private void SaveName(string text)
     {
         _saveSetup.playerName = text;
@@ -90,7 +115,6 @@ public class SaveManager : Singleton<SaveManager>
             {
                 FileLoaded.Invoke(_saveSetup);
             }
-
         }
         else
         {
@@ -115,4 +139,6 @@ public class SaveSetup
     public bool playerPositionHasValue;
     public Vector3 playerPosition;
     public string playerName;
+    public Dictionary<string, int> deadEnemies;
+    public float playerHealth;
 }

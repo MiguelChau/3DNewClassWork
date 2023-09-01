@@ -32,11 +32,33 @@ public class HealthBase : MonoBehaviour, IDamageable
         
     }
 
+    public void SavePlayerHealth()
+    {
+        SaveManager.Instance.Setup.playerHealth = _currentLife;
+    }
+
     public void ResetLife()
     {
-        _currentLife = startLife;
+        if (SaveManager.Instance.Setup != null)
+        {
+            
+            if (SaveManager.Instance.Setup.playerHealth > 0)
+            {
+                _currentLife = SaveManager.Instance.Setup.playerHealth;
+            }
+            else
+            {
+                _currentLife = startLife;
+            }
+        }
+        else
+        {
+            _currentLife = startLife;
+        }
+
         UpdateUI();
     }
+
 
     public void SetInvulnerable()
     {

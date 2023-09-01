@@ -145,6 +145,20 @@ namespace Enemy
             {
                 enemyDeathParticleSystem.Play();
             }
+
+            if (SaveManager.Instance.Setup != null)
+            {
+                string enemyName = gameObject.name;
+                if (SaveManager.Instance.Setup.deadEnemies.ContainsKey(enemyName))
+                {
+                    SaveManager.Instance.Setup.deadEnemies[enemyName]++;
+                }
+                else
+                {
+                    SaveManager.Instance.Setup.deadEnemies.Add(enemyName, 1);
+                }
+            }
+
             SwitchState(EnemyAction.DEATH);
         }
         #endregion

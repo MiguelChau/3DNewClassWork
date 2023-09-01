@@ -14,4 +14,9 @@ public class LoadSceneHelper : MonoBehaviour
     {
         SaveManager.Instance.Load(); 
     }
+
+    public void CreateNewSave()
+    {
+        SaveManager.Instance.CreateNewSave();
+    }
 }

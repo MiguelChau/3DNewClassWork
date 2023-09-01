@@ -250,6 +250,7 @@ MonoBehaviour:
   enemyDamageParticleSystem: {fileID: 7069786848760552713}
   enemyCollider: {fileID: 994294763146595872}
   lookAtPlayer: 1
+  enemyID: 
   radiusToDetectPlayer: 15
   startAnimationDuration: 0.5
   startAnimationEase: 27
@@ -277,8 +278,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Size: {x: 1.4587722, y: 1.2496853, z: 1}
+  m_Center: {x: -0.00010609627, y: 0.62484264, z: 0}
 --- !u!114 &994294763146595874
 MonoBehaviour:
   m_ObjectHideFlags: 0
