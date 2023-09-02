@@ -136,6 +136,7 @@ MonoBehaviour:
   keyCode: 99
   animator: {fileID: 6973091777720809778}
   triggerOpen: Open
+  sfxType: 3
   notification: {fileID: 6973091778287073598}
   tweenDuration: 0.2
   tweenEase: 29
@@ -300,6 +301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a4b1551bb9a72e41be61aa357910132, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sfxType: 5
   itemType: 1
   itemCount: 2
   itemPrefab: {fileID: 7108329626732567548, guid: 1fa630f03e8f154488f5c62b4fd7909c, type: 3}

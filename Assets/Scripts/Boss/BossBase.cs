@@ -170,6 +170,7 @@ namespace Boss
             SwitchState(BossAction.DEATH);
 
             onKillEvent?.Invoke();
+            
             uiEndGame.CallEndGame();
             
         }

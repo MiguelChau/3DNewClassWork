@@ -5,12 +5,13 @@ using UnityEngine;
 public class EndGame : MonoBehaviour
 {
     public GameObject uiEndGame;
-    public float delayEndGame = 3f;
+    public float delayEndGame = 10f;
     
     public void CallEndGame()
     {
        
         uiEndGame.SetActive(true);
+        AudioManager.Instance.PlayMusicByType(MusicType.MUSIC_02);
 
     }
 }
