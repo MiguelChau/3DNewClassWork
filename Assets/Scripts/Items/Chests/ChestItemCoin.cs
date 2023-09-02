@@ -6,10 +6,10 @@ using Items;
 
 public class ChestItemCoin : ChestItemBase
 {
+    public SFXType sfxType;
     public ItemType itemType; 
     public int itemCount = 5;
     public GameObject itemPrefab;
-    public AudioSource audioSource;
 
     private List<GameObject> _items = new List<GameObject>();
 
@@ -20,8 +20,6 @@ public class ChestItemCoin : ChestItemBase
     {
         base.ShowItem();
         CreateItems();
-
-
     }
 
     [NaughtyAttributes.Button]
@@ -39,11 +37,17 @@ public class ChestItemCoin : ChestItemBase
         }
     }
 
+    private void PlaySFX()
+    {
+        SFXPool.Instance.Play(sfxType);
+    }
+
     [NaughtyAttributes.Button]
     public override void Collect()
     {
         base.Collect();
-        foreach(var i in _items)
+        PlaySFX();
+        foreach (var i in _items)
         {
             var itemComponent = i.GetComponent<ItemManager>();
             if (itemComponent != null)
@@ -51,7 +55,7 @@ public class ChestItemCoin : ChestItemBase
                 i.transform.DOMoveY(2f, tweenEndTime).SetRelative(); 
                 i.transform.DOScale(0, tweenEndTime / 2).SetDelay(tweenEndTime / 2);
                 ItemManager.Instance.AddByType(itemType);
-                audioSource.Play();
+                
             }
             
         }

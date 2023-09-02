@@ -6,9 +6,9 @@ namespace Cloth
 {
     public class ClothItemBase : MonoBehaviour
     {
+        public SFXType sfxType;
         public ClothType clothType; 
         public float duration = 2f;
-        public AudioSource audioSource;
 
         public string compareTag = "Player";
 
@@ -25,10 +25,14 @@ namespace Cloth
                 Collect();
             }
         }
-
+        [NaughtyAttributes.Button]
+        private void PlaySFX()
+        {
+            SFXPool.Instance.Play(sfxType);
+        }
         public virtual void Collect() 
         {
-            if (audioSource != null) audioSource.Play();
+            PlaySFX();
 
             HideObject();
         }

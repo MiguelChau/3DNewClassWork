@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 175ad1bee35de054a97bb6ab8c373ce8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sfxType: 1
   itemType: 0
   compareTag: Player
   graphicItem: {fileID: 8369348835785730797}
@@ -57,7 +58,6 @@ MonoBehaviour:
   itemColliders:
   - {fileID: 2453182538852772802}
   - {fileID: 6705407032285186320}
-  audioSource: {fileID: 6598193068334027632}
   itemParticleSystem: {fileID: 0}
 --- !u!135 &2453182538852772802
 SphereCollider:

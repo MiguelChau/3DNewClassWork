@@ -6,6 +6,7 @@ namespace Items
 {
     public class ItemCollactableBase : MonoBehaviour
     {
+        public SFXType sfxType;
         public ItemType itemType;
 
         public string compareTag = "Player";
@@ -16,7 +17,7 @@ namespace Items
         public Collider[] itemColliders;
 
         [Header("Sounds")]
-        public AudioSource audioSource;
+        //public AudioSource audioSource;
 
         [Header("VFX")]
         public ParticleSystem itemParticleSystem;
@@ -32,8 +33,14 @@ namespace Items
                 Collect();
             }
         }
+
+        private void PlaySFX()
+        {
+            SFXPool.Instance.Play(sfxType);
+        }
         protected virtual void Collect()
         {
+            PlaySFX();
             if (itemColliders != null)
             {
                 for(int i = 0; i < itemColliders.Length; ++i)
@@ -54,7 +61,7 @@ namespace Items
         protected virtual void OnCollect()
         {
             if (itemParticleSystem != null) itemParticleSystem.Play();
-            if (audioSource != null) audioSource.Play();
+            //if (audioSource != null) audioSource.Play();
             ItemManager.Instance.AddByType(itemType);
         }
     }

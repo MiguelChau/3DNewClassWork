@@ -1,12 +1,12 @@
 {
     "lastLevel": 0,
-    "coins": 1.0,
-    "health": 0.0,
+    "coins": 40.0,
+    "health": 1.0,
     "playerPositionHasValue": true,
     "playerPosition": {
-        "x": -27.82900619506836,
-        "y": 0.6639400720596314,
-        "z": -28.506200790405275
+        "x": -24.36061668395996,
+        "y": 0.5552622079849243,
+        "z": -29.549169540405275
     },
     "playerName": "Diana",
     "playerHealth": 0.0

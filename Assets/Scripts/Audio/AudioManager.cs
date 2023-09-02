@@ -9,6 +9,7 @@ public class AudioManager : Singleton<AudioManager>
     public List<SFXSetup> sfxSetups;
 
     public AudioSource musicSource;
+    public AudioSource SFXSource;
 
     public void PlayMusicByType(MusicType musicType)
     {
@@ -45,7 +46,10 @@ public enum SFXType
     NONE,
     SFX_01,
     SFX_02,
-    SFX_03
+    SFX_03,
+    SFX_04,
+    SFX_05,
+    SFX_06
 }
 [System.Serializable]
 public class SFXSetup

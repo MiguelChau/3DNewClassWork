@@ -8,7 +8,7 @@ public class ChestBase : MonoBehaviour
     public KeyCode keyCode = KeyCode.O;
     public Animator animator;
     public string triggerOpen = "Open";
-    public AudioSource chestAudioSource;
+    public SFXType sfxType;
 
     [Header("Notification")]
     public GameObject notification;
@@ -29,16 +29,19 @@ public class ChestBase : MonoBehaviour
         HideNotification();
     }
 
-    
+    private void PlaySFX()
+    {
+        SFXPool.Instance.Play(sfxType);
+    }
 
     [NaughtyAttributes.Button]
     private void OpenChest ()
     {
+        PlaySFX();
         if (_chestOpened) return; //isto evita bugs futuros como duplicar os items
 
         animator.SetTrigger(triggerOpen);
         _chestOpened = true;
-        if (chestAudioSource != null) chestAudioSource.Play();
         HideNotification();
         Invoke(nameof(ShowItem), 1f);
     }
