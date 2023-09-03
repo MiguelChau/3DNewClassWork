@@ -10,7 +10,8 @@ public enum PlayerStates
     IDLE,
     RUN,
     JUMPING,
-    DEATH
+    DEATH,
+    MAGIC
 }
 
 [Serializable]
@@ -25,6 +26,7 @@ public class PlayerStateMachine : StateMachine<PlayerStates>
         RegisterStates(PlayerStates.RUN, new RunningState());
         RegisterStates(PlayerStates.JUMPING, new JumpingState());
         RegisterStates(PlayerStates.DEATH, new DeathState());
+        RegisterStates(PlayerStates.MAGIC, new MagicState());
 
         SwitchState(PlayerStates.IDLE);
     }    
@@ -49,6 +51,10 @@ public class PlayerStateMachine : StateMachine<PlayerStates>
      public void Jump()
      {
         SwitchState(PlayerStates.JUMPING);
+     } 
+    public void AttackMagic(MagicBase m)
+     {
+        SwitchState(PlayerStates.MAGIC);
      }
 
     public void Death(HealthBase h)

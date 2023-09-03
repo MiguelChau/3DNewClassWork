@@ -199,6 +199,7 @@ public class PlayerController : Singleton<PlayerController>
 
         myAnimator.SetBool("Run", isWalking);  
         myAnimator.SetBool("Jump", _isJumping);
+        myAnimator.SetBool("CastingMagic", false);
 
 
     }
