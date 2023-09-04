@@ -83,23 +83,23 @@ public class DeathState : StateBase
 
     }
 }
-public class MagicState : StateBase
+public class AttackState : StateBase
 {
     public override void OnStateEnter(params object[] objs)
     {
-        Debug.Log("Entering Magic State");
+        Debug.Log("Entering Attack State");
 
     }
 
     public override void OnStateStay()
     {
-        Debug.Log("Magic State");
+        Debug.Log("Attack State");
 
     }
 
     public override void OnStateExit()
     {
-        Debug.Log("Exiting Magic State");
+        Debug.Log("Exiting Attack State");
 
     }
 }

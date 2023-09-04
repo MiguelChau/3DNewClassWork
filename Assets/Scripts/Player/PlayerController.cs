@@ -37,6 +37,7 @@ public class PlayerController : Singleton<PlayerController>
     [Space]
     [SerializeField] private ClothChange _clothChange;
 
+    private bool _isCastingMagic = false;
     private float vSpeed = 0f;
     public PlayerStateMachine _playerStateMachine;
     private float targetScale;
@@ -129,7 +130,28 @@ public class PlayerController : Singleton<PlayerController>
     }
 
     #endregion
+    public void AttackMagic()
+    {
+        
+        myAnimator.SetBool("CastingMagic", true);
 
+        
+        _isCastingMagic = true;
+
+        
+        _playerStateMachine.SwitchState(PlayerStates.ATTACK);
+    }
+
+    public void StopCastingMagic()
+    {
+       
+        myAnimator.SetBool("CastingMagic", false);
+
+
+        _isCastingMagic = false;
+
+       
+    }
 
     private void Update()
     {

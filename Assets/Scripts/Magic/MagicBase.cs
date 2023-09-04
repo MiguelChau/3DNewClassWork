@@ -7,7 +7,6 @@ public class MagicBase : MonoBehaviour
 {
     public SpelltileBase prefabSpelltile;
     public AudioSource audioSource;
-    public AnimationBase animationBase;
 
     public Transform positionToCast;
     public float timeBetweenCast = .3f;
@@ -39,7 +38,7 @@ public class MagicBase : MonoBehaviour
     {
         StopCast();
         _currentCoroutine = StartCoroutine(CastCoroutine());
-        animationBase.PlayAnimationByTrigger(AnimationType.ATTACK);
+        
     }
 
     public void StopCast()

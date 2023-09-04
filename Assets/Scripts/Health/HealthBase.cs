@@ -29,7 +29,9 @@ public class HealthBase : MonoBehaviour, IDamageable
     public void Init()
     {
         ResetLife();
-        
+        SavePlayerHealth();
+
+
     }
 
     public void SavePlayerHealth()
