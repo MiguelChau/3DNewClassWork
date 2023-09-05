@@ -29,9 +29,12 @@ public class HealthBase : MonoBehaviour, IDamageable
     public void Init()
     {
         ResetLife();
-        SavePlayerHealth();
-
-
+    }
+    
+    public void SetLife(float life)
+    {
+        _currentLife = life;
+        UpdateUI();
     }
 
     public void SavePlayerHealth()
@@ -41,23 +44,7 @@ public class HealthBase : MonoBehaviour, IDamageable
 
     public void ResetLife()
     {
-        if (SaveManager.Instance.Setup != null)
-        {
-            
-            if (SaveManager.Instance.Setup.playerHealth > 0)
-            {
-                _currentLife = SaveManager.Instance.Setup.playerHealth;
-            }
-            else
-            {
-                _currentLife = startLife;
-            }
-        }
-        else
-        {
-            _currentLife = startLife;
-        }
-
+        _currentLife = startLife;
         UpdateUI();
     }
 

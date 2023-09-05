@@ -30,6 +30,7 @@ namespace Enemy
         public ParticleSystem enemyDeathParticleSystem;
         public ParticleSystem enemyDamageParticleSystem;
         public Collider enemyCollider;
+        public int enemyID;
         public bool lookAtPlayer = false;
         protected bool _playerDetected = false;
 
@@ -69,6 +70,7 @@ namespace Enemy
             }
             Init();
             healthBase.OnKill += OnEnemyKill;
+
         }
 
         private void Start()
@@ -146,21 +148,9 @@ namespace Enemy
                 enemyDeathParticleSystem.Play();
             }
 
-            if (SaveManager.Instance.Setup != null)
-            {
-                string enemyName = gameObject.name;
-                if (SaveManager.Instance.Setup.deadEnemies.ContainsKey(enemyName))
-                {
-                    SaveManager.Instance.Setup.deadEnemies[enemyName]++;
-                }
-                else
-                {
-                    SaveManager.Instance.Setup.deadEnemies.Add(enemyName, 1);
-                }
-            }
-
             SwitchState(EnemyAction.DEATH);
         }
+
         #endregion
 
         #region ATTACK

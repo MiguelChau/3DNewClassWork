@@ -60,11 +60,19 @@ public class PlayerController : Singleton<PlayerController>
 
     private void CheckLoadedData()
     {
-        var setupPosition = SaveManager.Instance.Setup;
+        var saveSetup = SaveManager.Instance.Setup;
 
-        if(setupPosition != null && setupPosition.playerPositionHasValue)
+        if(saveSetup != null)
         {
-            transform.position = setupPosition.playerPosition;
+            if(saveSetup.playerPositionHasValue)
+            {
+                transform.position = saveSetup.playerPosition;
+            }
+
+            if(saveSetup.playerHealth != -1)
+            {
+                healthBase.SetLife(saveSetup.playerHealth);
+            }
         }
     }
 

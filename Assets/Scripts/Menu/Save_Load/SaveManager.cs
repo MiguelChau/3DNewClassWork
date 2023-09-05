@@ -32,6 +32,9 @@ public class SaveManager : Singleton<SaveManager>
         _saveSetup.lastLevel = 0;
         _saveSetup.playerName = "Diana";
         _saveSetup.playerPositionHasValue = false;
+        _saveSetup.playerHealth = -1f;
+        _saveSetup.deadEnemyIDs = new List<int>();
+        
     }
 
     private void Start()
@@ -56,27 +59,26 @@ public class SaveManager : Singleton<SaveManager>
 
     public void SaveEnemiesDead()
     {
+        _saveSetup.deadEnemyIDs = new List<int>();
 
-        if (_saveSetup.deadEnemies != null)
+        foreach (var enemy in EnemyManager.Instance.enemies)
         {
-            foreach (var enemyName in _saveSetup.deadEnemies.Keys)
+            if (!enemy.gameObject.activeSelf)
             {
-                int numberOfTimesKilled = _saveSetup.deadEnemies[enemyName];
+                int enemyID = enemy.enemyID; 
+
+                _saveSetup.deadEnemyIDs.Add(enemyID);
             }
         }
         Save();
-
     }
 
     public void SavePlayerHealth()
     {
-        if (_saveSetup.playerHealth > 0)
+        HealthBase playerHealth = GameObject.FindObjectOfType<HealthBase>(); 
+        if (playerHealth != null)
         {
-            HealthBase playerHealth = GameObject.FindObjectOfType<HealthBase>(); 
-            if (playerHealth != null)
-            {
-                playerHealth.SavePlayerHealth();
-            }
+            playerHealth.SavePlayerHealth();
         }
         Save();
     }
@@ -139,6 +141,6 @@ public class SaveSetup
     public bool playerPositionHasValue;
     public Vector3 playerPosition;
     public string playerName;
-    public Dictionary<string, int> deadEnemies;
+    public List<int> deadEnemyIDs;
     public float playerHealth;
 }
