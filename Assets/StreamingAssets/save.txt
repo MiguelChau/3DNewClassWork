@@ -4,11 +4,19 @@
     "health": 1.0,
     "playerPositionHasValue": true,
     "playerPosition": {
-        "x": -25.726043701171876,
-        "y": 0.599897027015686,
-        "z": -28.67942237854004
+        "x": -25.639793395996095,
+        "y": 0.6073324680328369,
+        "z": -28.772436141967775
     },
     "playerName": "Diana",
-    "deadEnemyIDs": [],
+    "deadEnemyIDs": [
+        1,
+        0,
+        0,
+        2,
+        0,
+        0,
+        5
+    ],
     "playerHealth": -1.0
 }

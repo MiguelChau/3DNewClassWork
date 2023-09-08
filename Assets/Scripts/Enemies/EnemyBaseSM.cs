@@ -75,7 +75,13 @@ namespace Enemy
 
         private void Start()
         {
+            EnemyManager.Instance.RegisterEnemy(this);
             StartInitAnimation();
+        }
+
+        private void OnDestroy()
+        {
+            EnemyManager.Instance.UnregisterEnemy(this);
         }
 
         protected virtual void Init()
@@ -149,6 +155,8 @@ namespace Enemy
             }
 
             SwitchState(EnemyAction.DEATH);
+
+            EnemyManager.Instance.InformEnemyDied(this);
         }
 
         #endregion

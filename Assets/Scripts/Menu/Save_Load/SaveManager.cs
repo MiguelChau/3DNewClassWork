@@ -59,17 +59,7 @@ public class SaveManager : Singleton<SaveManager>
 
     public void SaveEnemiesDead()
     {
-        _saveSetup.deadEnemyIDs = new List<int>();
-
-        foreach (var enemy in EnemyManager.Instance.enemies)
-        {
-            if (!enemy.gameObject.activeSelf)
-            {
-                int enemyID = enemy.enemyID; 
-
-                _saveSetup.deadEnemyIDs.Add(enemyID);
-            }
-        }
+        _saveSetup.deadEnemyIDs = EnemyManager.Instance.deadEnemyIDs;
         Save();
     }
 

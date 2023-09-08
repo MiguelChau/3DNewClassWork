@@ -63,7 +63,8 @@ public class CheckPointBase : MonoBehaviour
             SaveManager.Instance.Setup.playerPosition = playerPosition;
             SaveManager.Instance.Setup.playerPositionHasValue = true;
         }
-       
+
+        SaveManager.Instance.SaveEnemiesDead();
         SaveManager.Instance.Save();
     }
 }

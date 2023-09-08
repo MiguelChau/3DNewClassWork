@@ -1308,11 +1308,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 74043178367263641, guid: bafbd58b5a4e82c428983b92e0d3d712, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 74043178367263641, guid: bafbd58b5a4e82c428983b92e0d3d712, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 74043178367263641, guid: bafbd58b5a4e82c428983b92e0d3d712, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
@@ -1344,11 +1344,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 74043178367263641, guid: bafbd58b5a4e82c428983b92e0d3d712, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: LoadLevel
+      value: LoadSavedData
       objectReference: {fileID: 0}
     - target: {fileID: 74043178367263641, guid: bafbd58b5a4e82c428983b92e0d3d712, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: LoadSavedData
+      value: LoadLevel
       objectReference: {fileID: 0}
     - target: {fileID: 74043178367263641, guid: bafbd58b5a4e82c428983b92e0d3d712, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
@@ -1368,11 +1368,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 74043178367263641, guid: bafbd58b5a4e82c428983b92e0d3d712, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_IntArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 74043178367263641, guid: bafbd58b5a4e82c428983b92e0d3d712, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_IntArgument
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 74043178367263641, guid: bafbd58b5a4e82c428983b92e0d3d712, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
-      value: Player
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 74043178367263641, guid: bafbd58b5a4e82c428983b92e0d3d712, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
