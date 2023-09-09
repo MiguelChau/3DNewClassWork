@@ -26,6 +26,32 @@ public class AudioManager : Singleton<AudioManager>
     {
         return sfxSetups.Find(i => i.sfxType == sfxType);
     }
+
+    private bool isSoundOn = true; 
+
+    
+    public void TurnSoundOn()
+    {
+        isSoundOn = true;
+        
+        musicSource.volume = 1f; 
+        SFXSource.volume = 1f; 
+    }
+
+    
+    public void TurnSoundOff()
+    {
+        isSoundOn = false;
+        
+        musicSource.volume = 0.0f; 
+        SFXSource.volume = 0.0f; 
+    }
+
+   
+    public bool IsSoundOn()
+    {
+        return isSoundOn;
+    }
 }
 
 public enum MusicType
