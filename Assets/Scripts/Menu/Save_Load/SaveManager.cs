@@ -65,11 +65,7 @@ public class SaveManager : Singleton<SaveManager>
 
     public void SavePlayerHealth()
     {
-        HealthBase playerHealth = GameObject.FindObjectOfType<HealthBase>(); 
-        if (playerHealth != null)
-        {
-            playerHealth.SavePlayerHealth();
-        }
+        _saveSetup.playerHealth = PlayerController.Instance.GetCurrentLife();
         Save();
     }
     private void SaveName(string text)

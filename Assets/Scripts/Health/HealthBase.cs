@@ -22,6 +22,8 @@ public class HealthBase : MonoBehaviour, IDamageable
     private float invulnerableTime = 5f;
     private float invulnerableTimeStart;
 
+    public float CurrentLife { get { return _currentLife; } }
+
     protected void Awake()
     {
         Init();
@@ -37,10 +39,10 @@ public class HealthBase : MonoBehaviour, IDamageable
         UpdateUI();
     }
 
-    public void SavePlayerHealth()
+    /*public void SavePlayerHealth()
     {
         SaveManager.Instance.Setup.playerHealth = _currentLife;
-    }
+    }*/
 
     public void ResetLife()
     {

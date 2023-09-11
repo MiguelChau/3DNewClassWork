@@ -42,6 +42,11 @@ public class PlayerController : Singleton<PlayerController>
     public PlayerStateMachine _playerStateMachine;
     private float targetScale;
 
+    public float GetCurrentLife()
+    {
+        return healthBase.CurrentLife;
+    }
+
     private void OnValidate()
     {
         if (healthBase == null) healthBase = GetComponent<HealthBase>();
