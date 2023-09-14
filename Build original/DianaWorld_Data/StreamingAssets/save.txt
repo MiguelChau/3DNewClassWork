@@ -1,0 +1,36 @@
+{
+    "lastLevel": 0,
+    "coins": 15.0,
+    "health": 3.0,
+    "playerPositionHasValue": true,
+    "playerPosition": {
+        "x": -98.1546630859375,
+        "y": 6.498134613037109,
+        "z": -86.34603118896485
+    },
+    "playerName": "Diana",
+    "deadEnemyIDs": [
+        0,
+        2,
+        2,
+        1,
+        4,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+    ],
+    "playerHealth": -1.0
+}
