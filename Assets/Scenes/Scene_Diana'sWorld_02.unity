@@ -28610,6 +28610,13 @@ PrefabInstance:
       propertyPath: onKillEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+<<<<<<< HEAD
+    - target: {fileID: 5879857875401254334, guid: e28ca5f3aaccc7549a53cea188b6dbd4, type: 3}
+      propertyPath: startLife
+      value: 300
+      objectReference: {fileID: 0}
+=======
+>>>>>>> parent of b6b53d2 (build up do jogo!)
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e28ca5f3aaccc7549a53cea188b6dbd4, type: 3}
 --- !u!1001 &6044509807405815146

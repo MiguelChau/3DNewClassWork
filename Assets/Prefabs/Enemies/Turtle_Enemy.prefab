@@ -1405,7 +1405,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c5744e2c44bbe04d914462d7e66122d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
+  startLife: 50
+=======
   startLife: 20
+>>>>>>> parent of b6b53d2 (build up do jogo!)
   destroyOnKill: 1
   _currentLife: 0
   damageMultiply: 1
